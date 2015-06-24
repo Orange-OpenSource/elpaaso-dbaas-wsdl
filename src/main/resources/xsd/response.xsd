@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" xmlns:enum="http://orange_dbaas/Ws/Api/enumeration"
+	xmlns:data="http://orange_dbaas/Ws/Api/data" targetNamespace="http://orange_dbaas/Ws/Api/response" xmlns:tns="http://orange_dbaas/Ws/Api/response"
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/enumeration" schemaLocation="enumeration.xsd" />
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/data" schemaLocation="data.xsd" />
+
+
+	<!-- USER -->
+	<xsd:complexType name="changeUserSettingsResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="getUserSettingsResponse">
+		<xsd:sequence>
+			<xsd:element name="dbaasUserParametersInfo" type="data:dbaasUserParametersInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="enableMailsResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="dropDatabaseUserResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" minOccurs="1" maxOccurs="1" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseUserResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" minOccurs="1" maxOccurs="1" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changePasswordResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" minOccurs="1" maxOccurs="1" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- DATABASE -->
+	<xsd:complexType name="createDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="createDatabaseResponseObject" type="data:createDatabaseResponseObject" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="stopDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="scaleStorageResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="allowedDatabaseEngineResponse">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineDescription" type="xsd:string" />
+			<xsd:element name="engineState" type="enum:engineStateWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="allowedSloResponse">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="slos" type="enum:sloWsEnum" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="allowedUsageResponse">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="usages" type="enum:usageWsEnum" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="allowedServiceClassResponse">
+		<xsd:sequence>
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabasesResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databaseInfo" type="data:databaseInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="owner" type="xsd:string" />
+			<xsd:element name="ownerDisplayName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="endPointFQDN" type="xsd:string" />
+			<xsd:element name="endPointTCPPort" type="xsd:string" />
+			<xsd:element name="endpointProtocol" type="xsd:string" />
+			<xsd:element name="databaseUsers" type="data:databaseUserInfoWithState" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="alternativeEndPoints" type="xsd:boolean" />
+			<xsd:element name="databaseState" type="enum:serviceStateWsEnum" />
+			<xsd:element name="databaseOperation" type="enum:operationWsEnum" />
+			<xsd:element name="size" type="xsd:double" />
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="engine" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="engineDescription" type="xsd:string" />
+			<xsd:element name="slo" type="enum:sloWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="sox" type="xsd:boolean" />
+			<xsd:element name="datacenter" type="xsd:string" />
+			<xsd:element name="networkZone" type="enum:networkZoneWsEnum" />
+			<xsd:element name="databaseSecurityGroup" type="xsd:string" />
+			<xsd:element name="maintenanceWindow" type="xsd:string" />
+			<xsd:element name="backupPlan" type="enum:backupPlanWsEnum" />
+			<xsd:element name="backupWindow" type="xsd:string" />
+			<xsd:element name="master" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+			<xsd:element name="creationDate" type="xsd:dateTime" />
+			<xsd:element name="serviceLifeTimeNbDaysLeft" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="serviceLifeTimeEndDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="dataLifeTimeNbDaysLeft" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="dataLifeTimeEndDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="replicas">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element maxOccurs="unbounded" minOccurs="0" name="replica" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getDatabaseLifeCycleResponse">
+		<xsd:sequence>
+			<xsd:element name="lifeCycleObject" type="data:lifeCycleObject" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="restoreDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeServiceClassResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeSLOResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeSOXStatusResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="changeMaintenanceWindowResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- JOB -->
+	<xsd:complexType name="getJobResponse">
+		<xsd:sequence>
+			<xsd:element name="job" type="data:jobInfo" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getJobStateResponse">
+		<xsd:sequence>
+			<xsd:element name="jobState" type="enum:jobStateWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getJobWithFullDetailsResponse">
+		<xsd:sequence>
+			<xsd:element name="job" type="data:jobInfoWithFullDetails" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listJobsResponse">
+		<xsd:sequence>
+			<xsd:element name="jobs" type="data:jobInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="cancelJobResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB ENGINE -->
+	<xsd:complexType name="listDatabaseEnginesResponse">
+		<xsd:sequence>
+			<xsd:element name="databaseEngine" type="data:databaseEngineInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- CIDR -->
+	<xsd:complexType name="authorizeCIDRResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="revokeCIDRResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- DB SECURITY GROUP -->
+	<xsd:complexType name="describeDatabaseSecurityGroupResponse">
+		<xsd:sequence>
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="applicativeSecurityGroupName" type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databaseServiceNames" type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="cICDRRanges" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabaseSecurityGroupsResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databaseSecurityGroupsNames" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabaseSecurityGroupResponse" />
+
+	<xsd:complexType name="createDatabaseSecurityGroupResponse" />
+
+	<!-- SNAPSHOT -->
+	<xsd:complexType name="describeSnapshotResponse">
+		<xsd:sequence>
+			<xsd:element name="snapshotInfo" type="data:snapshotInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getSnapshotLifeCycleResponse">
+		<xsd:sequence>
+			<xsd:element name="lifeCycleObject" type="data:lifeCycleObject" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listSnapshotsResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="snapshotInfo" type="data:snapshotInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listSnapshotsByDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="snapshotInfo" type="data:snapshotInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="restoreFromSnapshotResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createSnapshotResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="createSnapshotResponseObject" type="data:createSnapshotResponseObject" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteSnapshotResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="updateSnapshotResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseFromSnapshotResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" maxOccurs="1" name="createDatabaseResponse" type="data:createDatabaseResponseObject" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- BACKUP -->
+	<xsd:complexType name="listAvailableBackupsResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="availableBackups" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="backupDatabaseResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseFromBackupResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeRetentionPeriodResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeBackupWindowResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+
+	</xsd:complexType>
+	<xsd:complexType name="changeBackupPlanResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getVersionResponse">
+		<xsd:sequence>
+			<xsd:element name="version" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- LEASING -->
+	<xsd:complexType name="setLifeTimesResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DASHBOARD -->
+	<xsd:complexType name="getDashboardResponse">
+		<xsd:sequence>
+			<xsd:element name="dashboardInfo" type="data:dbaasDashboardInfo" maxOccurs="1" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:enum="http://orange_dbaas/Ws/Api/enumeration" xmlns:Q1="http://orange_dbaas/Ws/Api/data"
+	xmlns="http://www.example.org" targetNamespace="http://orange_dbaas/Ws/Api/data" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/enumeration" schemaLocation="enumeration.xsd" />
+
+	<xsd:simpleType name="UUIDType">
+		<xsd:restriction base="xsd:ID">
+			<xsd:length value="36" fixed="true" />
+			<xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[8-9a-bA-B][0-9a-fA-F]{3}-[0-9a-fA-F]{12}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="userRole">
+		<xsd:sequence>
+			<xsd:element name="role" type="enum:userRoleWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="databaseGroupUserRole">
+		<xsd:sequence>
+			<xsd:element name="role" type="enum:databaseGroupUserRoleWsEnum" />
+			<xsd:element name="databaseGroup" type="xsd:string" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="endPoint">
+		<xsd:sequence>
+			<xsd:element name="fqdn" type="xsd:string" />
+			<xsd:element name="tcpPort" type="xsd:integer" />
+			<xsd:element name="endPointType" type="enum:endPointTypeWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="history">
+		<xsd:sequence>
+			<xsd:element name="date" type="xsd:date" />
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="shortSnapshotInfo">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="Q1:UUIDType" />
+			<xsd:element name="snapshotName" type="xsd:string" />
+			<xsd:element name="databaseUUId" type="Q1:UUIDType" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="databaseName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="owner" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="snapshotInfo">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="Q1:UUIDType" />
+			<xsd:element name="snapshotName" type="xsd:string" />
+			<xsd:element name="databaseUUId" type="Q1:UUIDType" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="databaseName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="creationDate" type="xsd:dateTime" />
+			<xsd:element name="endLifeDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="comment" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="snapshotState" type="enum:snapshotStateWsEnum" />
+			<xsd:element name="size" type="xsd:double" />
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="owner" type="xsd:string" />
+			<xsd:element name="displayName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Infra Object -->
+	<xsd:complexType name="infrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+			<xsd:element name="engine" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="usage" type="enum:usageWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="server">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+			<xsd:element name="serverIp" type="xsd:string" />
+			<xsd:element name="serverLogin" type="xsd:string" />
+			<xsd:element name="serverPassword" type="xsd:string" />
+			<xsd:element name="cpu" type="xsd:integer" />
+			<xsd:element name="memory" type="xsd:integer" />
+			<xsd:element name="storage" type="xsd:integer" />
+			<xsd:element name="vcpu" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="serverInfos">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+			<xsd:element name="newServerName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="fqdn" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="updatePublicFqdn" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="publicFqdn" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="processingPower" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="memoryCapacity" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="storageCapacity" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="vcpu" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="jobMessage">
+		<xsd:sequence>
+			<xsd:element name="date" type="xsd:dateTime" />
+			<xsd:element name="message" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="jobInfoWithFullDetails">
+		<xsd:sequence>
+			<xsd:element name="date" type="xsd:dateTime" />
+			<xsd:element name="scheduledDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="shortDbaasUserInfo" type="Q1:shortDbaasUserInfo" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="childrenJobs" type="Q1:jobInfoWithFullDetails" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="snapshotInfo" type="Q1:shortSnapshotInfo" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="databaseSchemaInfo" type="Q1:shortDatabaseSchemaInfo" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="action" type="enum:jobActionWsEnum" />
+			<xsd:element name="jobState" type="enum:jobStateWsEnum" />
+			<xsd:element name="messages" type="Q1:jobMessage" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="elementUUID" type="Q1:UUIDType" />
+			<xsd:element name="jobId" type="xsd:int" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="jobInfo">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="date" type="xsd:dateTime" />
+			<xsd:element name="scheduledDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="action" type="enum:jobActionWsEnum" />
+			<xsd:element name="jobState" type="enum:jobStateWsEnum" />
+			<xsd:element name="messages" type="Q1:jobMessage" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="databaseInfo">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="Q1:UUIDType" />
+			<xsd:element name="owner" type="xsd:string" />
+			<xsd:element name="displayName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+			<xsd:element name="creationDate" type="xsd:dateTime" />
+			<xsd:element name="engine" type="enum:engineWsEnum" />
+			<xsd:element name="databaseState" type="enum:serviceStateWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="backup">
+		<xsd:sequence>
+			<xsd:element name="backupFile" type="xsd:string" />
+			<xsd:element name="timepoint" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseResponseObject">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="databaseUUId" type="Q1:UUIDType" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="databaseName" type="xsd:string" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createSnapshotResponseObject">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="snapshotUUId" type="Q1:UUIDType" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="serviceClassInfo">
+		<xsd:sequence>
+			<xsd:element name="code" type="enum:serviceClassWsEnum" />
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="cpuPower" type="xsd:integer" />
+			<xsd:element name="nbVcpu" type="xsd:integer" />
+			<xsd:element name="memoryMb" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="databaseEngineInfo">
+		<xsd:sequence>
+			<xsd:element name="engineId" type="xsd:integer" />
+			<xsd:element name="fromEngineId" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="toEngineIds" type="xsd:integer" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineDescription" type="xsd:string" />
+			<xsd:element name="engineState" type="enum:engineStateWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="serviceClasses" type="Q1:serviceClassInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="operatingSystemInfo">
+		<xsd:sequence>
+			<xsd:element name="operatingSystemName" type="xsd:string" />
+			<xsd:element name="operatingSystemVersion" type="xsd:string" />
+			<xsd:element name="operatingSystemReservedMemory" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="storageInfo">
+		<xsd:sequence>
+			<xsd:element name="elementUUID" type="Q1:UUIDType" />
+			<xsd:element name="storageName" type="xsd:string" />
+			<xsd:element name="storageSize" type="xsd:integer" />
+			<xsd:element name="staticStorageMountPoint" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="filerFqdn" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="filerMountPoint" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="filerMountType" type="enum:filerMountTypeWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="filerMountOptions" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="serverInfo">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+			<xsd:element name="infrastructureName" type="xsd:string" />
+			<xsd:element name="fqdn" type="xsd:string" />
+			<xsd:element name="state" type="enum:serverStateWsEnum" />
+			<xsd:element name="processingPower" type="xsd:integer" />
+			<xsd:element name="memoryCapacity" type="xsd:integer" />
+			<xsd:element name="storageCapacity" type="xsd:integer" />
+			<xsd:element name="nbCpu" type="xsd:integer" />
+			<xsd:element name="usedProcessingPower" type="xsd:integer" />
+			<xsd:element name="usedMemoryCapacity" type="xsd:integer" />
+			<xsd:element name="usedStorageCapacity" type="xsd:integer" />
+			<xsd:element name="operatingSystemName" type="xsd:string" />
+			<xsd:element name="operatingSystemVersion" type="xsd:string" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databases" type="Q1:shortDatabaseSchemaInfo" />
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="serverUsers" type="Q1:serverUserInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="shortDatabaseSchemaInfo">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="Q1:UUIDType" />
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="owner" type="xsd:string" />
+			<xsd:element name="databaseGroupName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="serverUserInfo">
+		<xsd:sequence>
+			<xsd:element name="loging" type="xsd:string" />
+			<xsd:element name="password" type="xsd:string" />
+			<xsd:element name="serverUserType" type="enum:serverUserTypeWsEnum" />
+			<xsd:element name="sshKeyName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="databaseUserInfo">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="password" type="xsd:string" />
+			<xsd:element name="databaseUserType" type="enum:databaseUserTypeWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="databaseUserInfoWithState">
+		<xsd:sequence>
+			<xsd:element name="databaseUserInfo" type="Q1:databaseUserInfo" />
+			<xsd:element name="databaseUserState" type="enum:databaseUserStateWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dbaasUserParametersInfo">
+		<xsd:sequence>
+			<xsd:element name="mailsEnabledFlag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="includeDebugAttachmentsInNotificationsFlag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="infoNotificationsEnabledFlag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="displayName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="email" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="language" type="enum:localizationWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="quotas" type="Q1:dbaasQuotaRate" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dbaasUserInfo">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="tenant" type="xsd:string" />
+			<xsd:element name="userState" type="enum:userStateWsEnum" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="userRole" type="Q1:userRole" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databaseGroupUserRole" type="Q1:databaseGroupUserRole" />
+			<xsd:element name="dbaasUserSettings" type="Q1:dbaasUserParametersInfo" />
+			<xsd:element name="allowedUsage" type="enum:usageWsEnum" />
+			<xsd:element name="maxAllowedSlo" type="enum:sloWsEnum" />
+			<xsd:element name="maxAllowedServiceClass" type="enum:serviceClassWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="shortDbaasUserInfo">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="tenant" type="xsd:string" />
+			<xsd:element name="userState" type="enum:userStateWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="dbaasDatacenterInfo">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dbaasQuotaRate">
+		<xsd:sequence>
+			<xsd:element name="quota" type="enum:quotaWsEnum" />
+			<xsd:element name="value" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- DASHBOARD -->
+	<xsd:complexType name="dbaasDashboardInfo">
+		<xsd:sequence>
+			<xsd:element name="userDBPerGroup" type="Q1:dbaasUserDBPerGroupInfo" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="oldestInstances" type="Q1:dbaasOldestDBInstanceInfo" minOccurs="1" maxOccurs="3" />
+			<xsd:element name="totalMemoryConsumption" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="totalStorageConsumption" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="quotas" type="Q1:dbaasQuotaRate" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dbaasUserDBPerGroupInfo">
+		<xsd:sequence>
+			<xsd:element name="dbgroup" type="xsd:string" />
+			<xsd:element name="nbTotalInstances" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="nbActivesInstances" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="memoryConsumption" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="storageConsumption" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dbaasOldestDBInstanceInfo">
+		<xsd:sequence>
+			<xsd:element name="dbuuid" type="Q1:UUIDType" />
+			<xsd:element name="dbname" type="xsd:string" />
+			<xsd:element name="dbgroup" type="xsd:string" />
+			<xsd:element name="age" type="xsd:integer" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="lifeCycleObject">
+		<xsd:sequence>
+			<xsd:element name="objectUUId" type="Q1:UUIDType" />
+			<xsd:element name="objectName" type="xsd:string" />
+			<xsd:element name="objectState" type="enum:objectStateWsEnum" />
+			<xsd:element name="objectType" type="enum:objectTypeWsEnum" />
+			<xsd:element name="creationDate" type="xsd:dateTime" />
+			<xsd:element name="description" type="xsd:string" />
+			<xsd:element name="lifeCycleObjects" type="Q1:lifeCycleObject" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="infrastructureInfo">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+			<xsd:element name="engine" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="usage" type="enum:usageWsEnum" />
+			<xsd:element name="datacenter" type="xsd:string" />
+			<xsd:element name="networkZone" type="xsd:string" />
+			<xsd:element name="state" type="enum:infrastructureStateWsEnum" />
+			<xsd:element name="processingPower" type="xsd:integer" />
+			<xsd:element name="memoryCapacity" type="xsd:integer" />
+			<xsd:element name="storageCapacity" type="xsd:integer" />
+			<xsd:element name="usedProcessingPower" type="xsd:integer" />
+			<xsd:element name="usedMemoryCapacity" type="xsd:integer" />
+			<xsd:element name="usedStorageCapacity" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="sshKeyInfo">
+		<xsd:sequence>
+			<xsd:element name="sshKeyName" type="xsd:string" />
+			<xsd:element name="sshKeyType" type="enum:sshKeyTypeWsEnum" />
+			<xsd:element name="privateKeyPassword" type="xsd:string" />
+			<xsd:element name="privateKey" type="xsd:string" />
+			<xsd:element name="publicKey" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="secondValue" id="secondValue">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="59" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="cronSecondField">
+		<xsd:sequence>
+			<xsd:element name="secondValue" type="Q1:secondValue" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="minuteValue" id="minuteValue">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="59" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="cronMinuteField">
+		<xsd:sequence>
+			<xsd:element name="minuteValue" type="Q1:minuteValue" />
+			<xsd:element name="crontabScheduleType" type="enum:crontabScheduleTypeEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="hourValue" id="hourValue">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="23" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="cronHourField">
+		<xsd:sequence>
+			<xsd:element name="hourValue" type="Q1:hourValue" />
+			<xsd:element name="crontabScheduleType" type="enum:crontabScheduleTypeEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="dayOfMonthValue" id="dayOfMonthValue">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="1" />
+			<xsd:maxInclusive value="31" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="yearValue" id="yearValue">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="2014" />
+			<xsd:maxInclusive value="2099" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="cronExpression">
+		<xsd:sequence>
+			<xsd:element name="secondField" type="Q1:cronSecondField" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="minuteField" type="Q1:cronMinuteField" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="hourField" type="Q1:cronHourField" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="dayOfMonthField" type="Q1:dayOfMonthValue" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="monthField" type="enum:crontabMonthEnum" minOccurs="0" maxOccurs="12" />
+			<xsd:element name="dayOfWeekField" type="enum:crontabDayOfWeekEnum" minOccurs="0" maxOccurs="7" />
+			<xsd:element name="yearField" type="Q1:yearValue" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="alarmInfo">
+		<xsd:sequence>
+			<xsd:element name="id" type="xsd:integer" />
+			<xsd:element name="date" type="xsd:dateTime" />
+			<xsd:element name="severity" type="enum:AlarmSeverityEnum" />
+			<xsd:element name="type" type="enum:AlarmTypeEnum" />
+			<xsd:element name="nbOccurrences" type="xsd:integer" />
+			<xsd:element name="nextNotificationDate" type="xsd:dateTime" />
+			<xsd:element name="databaseSchema" type="Q1:databaseInfo" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="databaseEngine" type="Q1:databaseEngineInfo" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

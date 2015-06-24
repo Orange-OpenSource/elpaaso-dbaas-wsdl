@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" xmlns:enum="http://orange_dbaas/Ws/Api/enumeration"
+	xmlns:data="http://orange_dbaas/Ws/Api/data" targetNamespace="http://orange_dbaas/Ws/Api/request" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/enumeration" schemaLocation="enumeration.xsd" />
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/data" schemaLocation="data.xsd" />
+
+
+	<!-- USER -->
+	<xsd:complexType name="changeUserSettings">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="dbaasUserParametersInfo" type="data:dbaasUserParametersInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getUserSettings">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseUser">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="userName" type="xsd:string" />
+			<xsd:element name="password" type="xsd:string" />
+			<xsd:element name="profile" type="enum:databaseUserTypeWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="dropDatabaseUser">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="userName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changePassword">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="userName" type="xsd:string" />
+			<xsd:element name="oldPassword" type="xsd:string" />
+			<xsd:element name="newPassword" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	
+
+	<!-- DATABASE -->
+	<xsd:complexType name="listAllowedSlos">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listAllowedUsages">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listAllowedServiceClasses">
+		<xsd:sequence />
+	</xsd:complexType>
+
+
+	<xsd:complexType name="createDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="size" type="xsd:int" />
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" />
+			<xsd:element name="engine" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="users" type="data:databaseUserInfo" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="sox" type="xsd:boolean" />
+			<xsd:element name="usage" type="enum:usageWsEnum" />
+			<xsd:element name="datacenter" type="xsd:string" />
+			<xsd:element name="networkZone" type="enum:networkZoneWsEnum" />
+			<xsd:element name="dbSecurityGroup" type="xsd:string" />
+			<xsd:element name="databaseParametersSetName" type="xsd:string" />
+			<xsd:element name="maintenanceWindow" type="xsd:string" />
+			<xsd:element name="backupPlan" type="enum:backupPlanWsEnum" />
+			<xsd:element name="backupWindow" type="xsd:string" />
+			<xsd:element name="autoUpgrade" type="xsd:boolean" />
+			<xsd:element name="description" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabases">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="youngestThan" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="oldestThan" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="stopDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getDatabaseLifeCycle">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="full" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="scaleStorage">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="size" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="restoreDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="timePoint" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeSLO">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="now" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeSOXStatus">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="sox" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeMaintenanceWindow">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="maintenanceWindow" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeServiceClass">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" />
+			<xsd:element name="now" type="xsd:boolean" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- CIDR -->
+	<xsd:complexType name="authorizeCIDR">
+		<xsd:sequence>
+			<xsd:element name="databaseSecurityGroupName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="cidr" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="revokeCIDR">
+		<xsd:sequence>
+			<xsd:element name="databaseSecurityGroupName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="cidr" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getVersion">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- SNAPSHOT -->
+	<xsd:complexType name="createSnapshot">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="snapshotName" type="xsd:string" />
+			<xsd:element name="comment" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="nbDaysLifeDuration" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="cronExpressionSchedule" type="data:cronExpression" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteSnapshot">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="updateSnapshot">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="data:UUIDType" />
+			<xsd:element name="snapshotName" type="xsd:string" />
+			<xsd:element name="nbDaysLifeDuration" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="comment" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeSnapshot">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getSnapshotLifeCycle">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listSnapshots">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listSnapshotsByDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="restoreFromSnapshot">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseFromSnapshot">
+		<xsd:sequence>
+			<xsd:element name="snapshotUUId" type="data:UUIDType" />
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="sox" type="xsd:boolean" />
+			<xsd:element name="usage" type="enum:usageWsEnum" />
+			<xsd:element name="datacenter" type="xsd:string" />
+			<xsd:element name="networkZone" type="enum:networkZoneWsEnum" />
+			<xsd:element name="dbSecurityGroup" type="xsd:string" />
+			<xsd:element name="databaseParametersSetName" type="xsd:string" />
+			<xsd:element name="maintenanceWindow" type="xsd:string" />
+			<xsd:element name="backupPlan" type="enum:backupPlanWsEnum" />
+			<xsd:element name="backupWindow" type="xsd:string" />
+			<xsd:element name="autoUpgrade" type="xsd:boolean" />
+			<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- JOB -->
+	<xsd:complexType name="getJob">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getJobState">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="getJobWithFullDetails">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listJobs">
+		<xsd:sequence>
+			<xsd:element name="state" type="enum:jobStateWsEnum" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="cancelJob">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- DB ENGINE -->
+	<xsd:complexType name="listDatabaseEngines">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listAllowedDatabaseEngines">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB SECURITY GROUP -->
+	<xsd:complexType name="describeDatabaseSecurityGroup">
+		<xsd:sequence>
+			<xsd:element name="databaseSecurityGroupName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabaseSecurityGroups">
+		<xsd:sequence>
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabaseSecurityGroup">
+		<xsd:sequence>
+			<xsd:element name="databaseSecurityGroupName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseSecurityGroup">
+		<xsd:sequence>
+			<xsd:element name="databaseSecurityGroupName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="applicativeSecurityGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- BACKUP -->
+	<xsd:complexType name="listAvailableBackups">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="backupDatabase">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatabaseFromBackup">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="backupedDatabase" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="timePoint" type="xsd:string" />
+			<xsd:element name="userName" type="xsd:string" />
+			<xsd:element name="password" type="xsd:string" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="sox" type="xsd:boolean" />
+			<xsd:element name="usage" type="enum:usageWsEnum" />
+			<xsd:element name="datacenter" type="xsd:string" />
+			<xsd:element name="networkZone" type="enum:networkZoneWsEnum" />
+			<xsd:element name="dbSecurityGroup" type="xsd:string" />
+			<xsd:element name="databaseParametersSetName" type="xsd:string" />
+			<xsd:element name="maintenanceWindow" type="xsd:string" />
+			<xsd:element name="backupPlan" type="enum:backupPlanWsEnum" />
+			<xsd:element name="backupWindow" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeRetentionPeriod">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="retentionPeriod" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeBackupWindow">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="backupWindow" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeBackupPlan">
+		<xsd:sequence>
+			<xsd:element name="databaseName" type="xsd:string" />
+			<xsd:element name="databaseGroup" type="xsd:string" />
+			<xsd:element name="backupPlan" type="enum:backupPlanWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- LEASING -->
+	<xsd:complexType name="setLifeTimes">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+			<xsd:element name="dataLifeTime" type="xsd:int" />
+			<xsd:element name="serviceLifeTime" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- DASHBOARD -->
+	<xsd:complexType name="getDashboard">
+		<xsd:sequence>
+			<xsd:element name="nbElementsInHistoric" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

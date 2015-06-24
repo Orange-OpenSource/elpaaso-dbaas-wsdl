@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" targetNamespace="http://orange_dbaas/Ws/Api/enumeration"
+	elementFormDefault="qualified">
+
+	<xsd:simpleType name="GrouRightWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ADMIN" />
+			<xsd:enumeration value="NORMAL" />
+			<xsd:enumeration value="LOW" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="serviceClassWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="XXXS" />
+			<xsd:enumeration value="XXS" />
+			<xsd:enumeration value="XS" />
+			<xsd:enumeration value="S" />
+			<xsd:enumeration value="M" />
+			<xsd:enumeration value="L" />
+			<xsd:enumeration value="XL" />
+			<xsd:enumeration value="XXL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="engineWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="POSTGRESQL" />
+			<xsd:enumeration value="MYSQL" />
+			<xsd:enumeration value="DB2" />
+			<xsd:enumeration value="ORACLE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="engineStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="GA" />
+			<xsd:enumeration value="BETA" />
+			<xsd:enumeration value="OBSOLETE" />
+			<xsd:enumeration value="DEPRECATED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="sloWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="HIGHLY_CRITICAL" />
+			<xsd:enumeration value="CRITICAL" />
+			<xsd:enumeration value="STANDARD" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="usageWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DEVTEST" />
+			<xsd:enumeration value="BENCHMARK" />
+			<xsd:enumeration value="PRE_OPERATION" />
+			<xsd:enumeration value="OPERATION" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="networkZoneWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="RSC" />
+			<xsd:enumeration value="GIN" />
+			<xsd:enumeration value="DMZ" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="backupPlanWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="LOCAL" />
+			<xsd:enumeration value="REMOTE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="serviceStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PENDING" />
+			<xsd:enumeration value="ACTIVE" />
+			<xsd:enumeration value="STOPPED" />
+			<xsd:enumeration value="DELETING" />
+			<xsd:enumeration value="DELETED" />
+			<xsd:enumeration value="CREATING" />
+			<xsd:enumeration value="STARTING" />
+			<xsd:enumeration value="STOPPING" />
+			<xsd:enumeration value="MAINTENANCE" />
+			<xsd:enumeration value="INCIDENT" />
+			<xsd:enumeration value="RESTORING" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="operationWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="BACKUP" />
+			<xsd:enumeration value="UPGRADE" />
+			<xsd:enumeration value="HA_FAIL_OVER" />
+			<xsd:enumeration value="HA_FAIL_BACK" />
+			<xsd:enumeration value="DRP_FAIL_OVER" />
+			<xsd:enumeration value="DRP_FAIL_BACK" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="jobActionWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DATABASE_CREATION" />
+			<xsd:enumeration value="DATABASE_CREATION_FROM_BACKUP" />
+			<xsd:enumeration value="DATABASE_CREATION_FROM_SNAPSHOT" />
+			<xsd:enumeration value="DATABASE_RESIZE" />
+			<xsd:enumeration value="DATABASE_BACKUP" />
+			<xsd:enumeration value="DATABASE_CHANGE_BACKUP_RETENTION" />
+			<xsd:enumeration value="DATABASE_CHANGE_BACKUP_PLAN" />
+			<xsd:enumeration value="DATABASE_CHANGE_BACKUP_WINDOW" />
+			<xsd:enumeration value="DATABASE_RESTORE" />
+			<xsd:enumeration value="DATABASE_START" />
+			<xsd:enumeration value="DATABASE_STOP" />
+			<xsd:enumeration value="DATABASE_DROP" />
+			<xsd:enumeration value="DATABASE_CONNECTION_TEST" />
+			<xsd:enumeration value="DATABASE_LOCK" />
+			<xsd:enumeration value="DATABASE_UNLOCK" />
+			<xsd:enumeration value="DATABASE_SECURISATION_CRON" />
+			<xsd:enumeration value="DATABASE_CHANGE_SERVICECLASS" />
+			<xsd:enumeration value="DATABASE_SNAPSHOT_CREATION" />
+			<xsd:enumeration value="DATABASE_SNAPSHOT_DELETION" />
+			<xsd:enumeration value="DATABASE_SNAPSHOT_ROLLBACK" />
+			<xsd:enumeration value="DATABASE_USER_CREATE" />
+			<xsd:enumeration value="DATABASE_USER_DROP" />
+			<xsd:enumeration value="DATABASE_USER_CHANGE_PASSWORD" />
+			<xsd:enumeration value="CIDR_AUTHORIZE" />
+			<xsd:enumeration value="CIDR_REVOKE" />
+			<xsd:enumeration value="SERVER_START" />
+			<xsd:enumeration value="SERVER_STOP" />
+			<xsd:enumeration value="INFRASTRUCTURE_START" />
+			<xsd:enumeration value="INFRASTRUCTURE_STOP" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="jobStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="WAITING" />
+			<xsd:enumeration value="PROCESSING" />
+			<xsd:enumeration value="ERROR" />
+			<xsd:enumeration value="CANCELLED" />
+			<xsd:enumeration value="SCHEDULED" />
+			<xsd:enumeration value="FINISHED" />
+			<xsd:enumeration value="MAINTENANCE" />
+			<xsd:enumeration value="DISABLED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="snapshotStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CREATING" />
+			<xsd:enumeration value="READY" />
+			<xsd:enumeration value="DELETING" />
+			<xsd:enumeration value="DELETED" />
+			<xsd:enumeration value="INCIDENT" />
+			<xsd:enumeration value="RESTORING" />
+			<xsd:enumeration value="PENDING" />
+			<xsd:enumeration value="SCHEDULED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="endPointTypeWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PRIMARY" />
+			<xsd:enumeration value="SECONDARY" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="infrastructureStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OPEN" />
+			<xsd:enumeration value="CLOSED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="serverStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OPEN" />
+			<xsd:enumeration value="CLOSED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="userStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ACTIVE" />
+			<xsd:enumeration value="LOCKED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="userRoleWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DEV" />
+			<xsd:enumeration value="OPS" />
+			<xsd:enumeration value="DEVOPS" />
+			<xsd:enumeration value="TENANT_ADMIN" />
+			<xsd:enumeration value="DBAAS_ADMIN" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="databaseGroupUserRoleWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DB_GROUP_ADMIN" />
+			<xsd:enumeration value="DB_GROUP_OPERATOR" />
+			<xsd:enumeration value="DB_GROUP_MEMBER" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="serverUserTypeWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ROOT" />
+			<xsd:enumeration value="MYSQL" />
+			<xsd:enumeration value="POSTGRES" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="localizationWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="en_US" />
+			<xsd:enumeration value="fr_FR" />
+			<xsd:enumeration value="es_ES" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="databaseUserTypeWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OWNER" />
+			<xsd:enumeration value="SELECT" />
+			<xsd:enumeration value="UPDATE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="filerMountTypeWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NFS_V3" />
+			<xsd:enumeration value="NFS_V4" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="sshKeyTypeWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DSA" />
+			<xsd:enumeration value="RSA" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="quotaWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PROCESSING_POWER" />
+			<xsd:enumeration value="MEMORY_CAPACITY" />
+			<xsd:enumeration value="STORAGE_CAPACITY" />
+			<xsd:enumeration value="SERVICE_LIFETIME" />
+			<xsd:enumeration value="DATA_LIFETIME" />
+			<xsd:enumeration value="NB_SNAPSHOTS" />
+			<xsd:enumeration value="NB_SNAPSHOTS_PER_DATABASE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="databaseUserStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AVAILABLE" />
+			<xsd:enumeration value="PENDING" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="objectStateWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AVAILABLE" />
+			<xsd:enumeration value="DELETED" />
+			<xsd:enumeration value="PENDING" />
+			<xsd:enumeration value="SCHEDULED" />
+			<xsd:enumeration value="INCIDENT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="objectTypeWsEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DATABASE_SCHEMA" />
+			<xsd:enumeration value="DATABASE_SNAPSHOT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="crontabMonthEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="UNSPECIFIED" />
+			<xsd:enumeration value="JAN" />
+			<xsd:enumeration value="FEB" />
+			<xsd:enumeration value="MAR" />
+			<xsd:enumeration value="APR" />
+			<xsd:enumeration value="MAY" />
+			<xsd:enumeration value="JUN" />
+			<xsd:enumeration value="JUL" />
+			<xsd:enumeration value="AUG" />
+			<xsd:enumeration value="SEP" />
+			<xsd:enumeration value="OCT" />
+			<xsd:enumeration value="NOV" />
+			<xsd:enumeration value="DEC" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="crontabDayOfWeekEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="UNSPECIFIED" />
+			<xsd:enumeration value="SUN" />
+			<xsd:enumeration value="MON" />
+			<xsd:enumeration value="TUE" />
+			<xsd:enumeration value="WED" />
+			<xsd:enumeration value="THU" />
+			<xsd:enumeration value="FRI" />
+			<xsd:enumeration value="SAT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="crontabScheduleTypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AT" />
+			<xsd:enumeration value="EVERY" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AlarmTypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DATABASE_ACCESS" />
+			<xsd:enumeration value="NOT_ENOUGH_CAPACITY_DATABASE_ENGINE" />
+			<xsd:enumeration value="NOT_ENOUGH_CAPACITY_FOR_SNAPSHOT_CREATION" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AlarmSeverityEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LOW" />
+			<xsd:enumeration value="MEDIUM" />
+			<xsd:enumeration value="HIGH" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>			

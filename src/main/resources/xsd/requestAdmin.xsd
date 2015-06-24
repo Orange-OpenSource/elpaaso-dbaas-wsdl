@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:enum="http://orange_dbaas/Ws/Api/enumeration" xmlns:data="http://orange_dbaas/Ws/Api/data"
+	xmlns="http://www.example.org" targetNamespace="http://orange_dbaas/Ws/Api/requestAdmin" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/enumeration" schemaLocation="enumeration.xsd" />
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/data" schemaLocation="data.xsd" />
+
+	<!-- HISTORY -->
+	<xsd:complexType name="getUserHistory">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="getTenantHistory">
+		<xsd:sequence>
+			<xsd:element name="tenantName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getHistory">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- USER and USERROLE -->
+	<xsd:complexType name="createUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="password" type="xsd:string" />
+			<xsd:element name="email" type="xsd:string" />
+			<xsd:element name="localization" type="enum:localizationWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="displayName" type="xsd:string" />
+			<xsd:element name="tenant" type="xsd:string" />
+			<xsd:element name="userRoles" type="data:userRole" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="databaseGroupUserRoles" type="data:databaseGroupUserRole" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="processingPowerQuota" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="memoryCapacityQuota" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="storageCapacityQuota" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="allowedUsages" type="enum:usageWsEnum" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="maxAllowedslo" type="enum:sloWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="maxAllowedServiceClass" type="enum:serviceClassWsEnum" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeUserPassword">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="oldPassword" type="xsd:string" />
+			<xsd:element name="newPassword" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeUserQuota">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="quotas" type="data:dbaasQuotaRate" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="grantUserRoleToUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="userRole" type="data:userRole" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="grantDatabaseGroupUserRoleToUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="userRole" type="data:databaseGroupUserRole" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="revokeUserRoleFromUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="userRole" type="data:userRole" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="revokeDatabaseGroupUserRoleFromUser">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="userRole" type="data:databaseGroupUserRole" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeUserState">
+		<xsd:sequence>
+			<xsd:element name="login" type="xsd:string" />
+			<xsd:element name="state" type="enum:userStateWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listUsers">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB GROUP -->
+	<xsd:complexType name="listDatabaseGroups">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB GROUP -->
+	<xsd:complexType name="createDatabaseGroup">
+		<xsd:sequence>
+			<xsd:element name="databaseGroupName" type="xsd:string" />
+			<xsd:element name="databaseGroupDescription" type="xsd:string" />
+			<xsd:element name="tenant" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="deleteDatabaseGroup">
+		<xsd:sequence>
+			<xsd:element name="databaseGroupName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- TENANT -->
+	<xsd:complexType name="listTenants">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="createTenant">
+		<xsd:sequence>
+			<xsd:element name="tenantName" type="xsd:string" />
+			<xsd:element name="tenantDescription" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="deleteTenant">
+		<xsd:sequence>
+			<xsd:element name="tenantName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="addUserToTenant">
+		<xsd:sequence>
+			<xsd:element name="tenantName" type="xsd:string" />
+			<xsd:element name="userLogin" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- LEASING -->
+	<!--xsd:complexType name="getLifeTime"> <xsd:sequence> <xsd:element name="databaseName" type="xsd:string" /> <xsd:element name="databaseGroup" type="xsd:string" 
+		/> </xsd:sequence> </xsd:complexType -->
+
+	<!--xsd:complexType name="setDataLifeTime"> <xsd:sequence> <xsd:element name="databaseName" type="xsd:string" /> <xsd:element name="databaseGroup" type="xsd:string" 
+		/> <xsd:element name="dataLifeTime" type="xsd:int" /> </xsd:sequence> </xsd:complexType -->
+
+	<!--xsd:complexType name="setServiceLifeTime"> <xsd:sequence> <xsd:element name="databaseName" type="xsd:string" /> <xsd:element name="databaseGroup" type="xsd:string" 
+		/> <xsd:element name="serviceLifeTime" type="xsd:int" /> </xsd:sequence> </xsd:complexType -->
+
+	<xsd:complexType name="setTenantLeasingPolicy">
+		<xsd:sequence>
+			<xsd:element name="tenantName" type="xsd:string" />
+			<xsd:element name="maxServiceLifeTime" type="xsd:int" />
+			<xsd:element name="maxDataLifeTime" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- DATACENTER -->
+	<xsd:complexType name="addInfrastructureToDatacenter">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+			<xsd:element name="InfrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="removeInfrastructureFromDatacenter">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+			<xsd:element name="InfrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatacenters">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatacenter">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+			<xsd:element name="DatacenterDescription" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="changeDatacenterDescription">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+			<xsd:element name="DatacenterDescription" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="deleteDatacenter">
+		<xsd:sequence>
+
+			<xsd:element name="DatacenterName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeDatacenter">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startDatacenter">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="stopDatacenter">
+		<xsd:sequence>
+			<xsd:element name="DatacenterName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- INFRASTRUCTURE -->
+	<xsd:complexType name="listInfrastructures">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="createInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+			<xsd:element name="engine" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="slo" type="enum:sloWsEnum" />
+			<xsd:element name="usage" type="enum:usageWsEnum" />
+			<xsd:element name="dataCenter" type="xsd:string" />
+			<xsd:element name="networkZone" type="enum:networkZoneWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabasesInInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="stopInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- SERVER -->
+	<xsd:complexType name="listServers">
+		<xsd:sequence>
+			<xsd:element name="infrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createServer">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+			<xsd:element name="operatingSystemName" type="xsd:string" />
+			<xsd:element name="operatingSystemVersion" type="xsd:string" />
+			<xsd:element name="infrastructureName" type="xsd:string" />
+			<xsd:element name="fqdn" type="xsd:string" />
+			<xsd:element name="publicFqdn" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="serverRootUser" type="data:serverUserInfo" />
+			<xsd:element name="serverDbUser" type="data:serverUserInfo" />
+			<xsd:element name="processingPower" type="xsd:integer" />
+			<xsd:element name="memoryCapacity" type="xsd:integer" />
+			<xsd:element name="storageCapacity" type="xsd:integer" />
+			<xsd:element name="vcpu" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="updateServer">
+		<xsd:sequence>
+			<xsd:element name="server" type="data:serverInfos" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteServer">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeServerState">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+			<xsd:element name="state" type="enum:serverStateWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeServer">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startServer">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="stopServer">
+		<xsd:sequence>
+			<xsd:element name="serverName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="enableServerUserPassword">
+		<xsd:sequence>
+			<xsd:element name="ServerName" type="xsd:string" />
+			<xsd:element name="serverUserType" type="enum:serverUserTypeWsEnum" />
+			<xsd:element name="password" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="enableServerUserSshAuth">
+		<xsd:sequence>
+			<xsd:element name="ServerName" type="xsd:string" />
+			<xsd:element name="serverUserType" type="enum:serverUserTypeWsEnum" />
+			<xsd:element name="sshKeyName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="serverUserGetSshKey">
+		<xsd:sequence>
+			<xsd:element name="ServerName" type="xsd:string" />
+			<xsd:element name="serverUserType" type="enum:serverUserTypeWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="addSshKey">
+		<xsd:sequence>
+			<xsd:element name="sshKey" type="data:sshKeyInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="generateSshKey">
+		<xsd:sequence>
+			<xsd:element name="keyName" type="xsd:string" />
+			<xsd:element name="keyType" type="enum:sshKeyTypeWsEnum" />
+			<xsd:element name="keyComment" type="xsd:string" />
+			<xsd:element name="keyPassPhrase" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getSshKey">
+		<xsd:sequence>
+			<xsd:element name="keyName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="removeSshKey">
+		<xsd:sequence>
+			<xsd:element name="keyName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listSshKeys">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="launchPurge">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB ENGINE -->
+	<xsd:complexType name="createDatabaseEngine">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="engineDescription" type="xsd:string" />
+			<xsd:element name="engineState" type="enum:engineStateWsEnum" />
+			<xsd:element name="fromEngineType" type="enum:engineWsEnum" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="fromEngineVersion" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="serviceClasses" type="data:serviceClassInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabaseEngine">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listEngines">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="describeEngine">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- OPERATING SYSTEM -->
+	<xsd:complexType name="createOperatingSystem">
+		<xsd:sequence>
+			<xsd:element name="operatingSystemName" type="xsd:string" />
+			<xsd:element name="operatingSystemVersion" type="xsd:string" />
+			<xsd:element name="operatingReservedMemory" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteOperatingSystem">
+		<xsd:sequence>
+			<xsd:element name="operatingSystemName" type="xsd:string" />
+			<xsd:element name="operatingSystemVersion" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listOperatingSystems">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- FILER -->
+	<xsd:complexType name="createStaticStorage">
+		<xsd:sequence>
+			<xsd:element name="staticStorageName" type="xsd:string" />
+			<xsd:element name="staticStorageMountPoint" type="xsd:string" />
+			<xsd:element name="staticStorageSize" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDynamicFiler">
+		<xsd:sequence>
+			<xsd:element name="filerName" type="xsd:string" />
+			<xsd:element name="filerFqdn" type="xsd:string" />
+			<xsd:element name="filerMountPoint" type="xsd:string" />
+			<xsd:element name="filerSize" type="xsd:integer" />
+			<xsd:element name="filerMountType" type="enum:filerMountTypeWsEnum" />
+			<xsd:element name="filerMountOptions" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteStorage">
+		<xsd:sequence>
+			<xsd:element name="storageName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listStorages">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="addStorageToInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="storageName" type="xsd:string" />
+			<xsd:element name="InfrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="removeStorageFromInfrastructure">
+		<xsd:sequence>
+			<xsd:element name="storageName" type="xsd:string" />
+			<xsd:element name="InfrastructureName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="addStaticStorageToServer">
+		<xsd:sequence>
+			<xsd:element name="staticStorageName" type="xsd:string" />
+			<xsd:element name="serverName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="removeStaticStorageFromServer">
+		<xsd:sequence>
+			<xsd:element name="staticStorageName" type="xsd:string" />
+			<xsd:element name="serverName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- DATABASE -->
+	<xsd:complexType name="getProtocols">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getMaxDatabases">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getDatabasesLeft">
+		<xsd:sequence>
+			<xsd:element name="engineType" type="enum:engineWsEnum" />
+			<xsd:element name="engineVersion" type="xsd:string" />
+			<xsd:element name="serviceClass" type="enum:serviceClassWsEnum" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getEndPointsForProtocol">
+		<xsd:sequence>
+			<xsd:element name="databaseUUId" type="data:UUIDType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="purgeJobs">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listServicesClass">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="acknowledgeAlarm">
+		<xsd:sequence>
+			<xsd:element name="alarmId" type="xsd:integer" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listCurrentAlarms">
+		<xsd:sequence />
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,4160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<definitions targetNamespace="http://orange_dbaas/Ws/Api" name="DbaasApi" xmlns:exception="http://orange_dbaas/Ws/Api/exception" xmlns:tns="http://orange_dbaas/Ws/Api"
+	xmlns:resp="http://orange_dbaas/Ws/Api/response" xmlns:req="http://orange_dbaas/Ws/Api/request" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+	<!-- Liste des types -->
+	<types>
+		<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://orange_dbaas/Ws/Api">
+
+			<xs:import namespace="http://orange_dbaas/Ws/Api/exception" schemaLocation="./xsd/exception.xsd" />
+			<xs:import namespace="http://orange_dbaas/Ws/Api/request" schemaLocation="./xsd/request.xsd" />
+			<xs:import namespace="http://orange_dbaas/Ws/Api/response" schemaLocation="./xsd/response.xsd" />
+
+
+			<!-- USER MANAGEMENT -->
+			<!-- changeUserSettings -->
+			<xs:element name="changeUserSettings" type="req:changeUserSettings" />
+			<xs:element name="changeUserSettingsResponse" type="resp:changeUserSettingsResponse" />
+
+			<!-- getUserSettings -->
+			<xs:element name="getUserSettings" type="req:getUserSettings" />
+			<xs:element name="getUserSettingsResponse" type="resp:getUserSettingsResponse" />
+
+			<!-- createDatabaseUser -->
+			<xs:element name="createDatabaseUser" type="req:createDatabaseUser" />
+			<xs:element name="createDatabaseUserResponse" type="resp:createDatabaseUserResponse" />
+
+			<!-- dropDatabaseUser -->
+			<xs:element name="dropDatabaseUser" type="req:dropDatabaseUser" />
+			<xs:element name="dropDatabaseUserResponse" type="resp:dropDatabaseUserResponse" />
+
+			<!-- changePassword -->
+			<xs:element name="changePassword" type="req:changePassword" />
+			<xs:element name="changePasswordResponse" type="resp:changePasswordResponse" />
+
+
+			<!-- listAllowedDatabaseEngines -->
+			<xs:element name="listAllowedDatabaseEngines" type="req:listAllowedDatabaseEngines" />
+			<xs:element name="listAllowedDatabaseEnginesResponse">
+				<complexType>
+					<sequence>
+						<element name="listAllowedDatabaseEnginesReturn" type="resp:allowedDatabaseEngineResponse" maxOccurs="unbounded" />
+					</sequence>
+				</complexType>
+			</xs:element>
+
+			<!-- listAllowedSlos -->
+			<xs:element name="listAllowedSlos" type="req:listAllowedSlos" />
+			<xs:element name="listAllowedSlosResponse">
+				<complexType>
+					<sequence>
+						<element name="listAllowedSlosReturn" type="resp:allowedSloResponse" maxOccurs="unbounded" />
+					</sequence>
+				</complexType>
+			</xs:element>
+
+			<!-- listAllowedUsages -->
+			<xs:element name="listAllowedUsages" type="req:listAllowedUsages" />
+			<xs:element name="listAllowedUsagesResponse">
+				<complexType>
+					<sequence>
+						<element name="listAllowedUsagesReturn" type="resp:allowedUsageResponse" maxOccurs="unbounded" />
+					</sequence>
+				</complexType>
+			</xs:element>
+
+			<!-- listAllowedServiceClasses -->
+			<xs:element name="listAllowedServiceClasses" type="req:listAllowedServiceClasses" />
+			<xs:element name="listAllowedServiceClassesResponse">
+				<complexType>
+					<sequence>
+						<element name="listAllowedServiceClassesReturn" type="resp:allowedServiceClassResponse" maxOccurs="unbounded" />
+					</sequence>
+				</complexType>
+			</xs:element>
+
+			<!-- JOB MANAGEMENT -->
+			<!-- getJob -->
+			<xs:element name="getJob" type="req:getJob" />
+			<xs:element name="getJobResponse" type="resp:getJobResponse" />
+
+			<xs:element name="getJobWithFullDetails" type="req:getJobWithFullDetails" />
+			<xs:element name="getJobWithFullDetailsResponse" type="resp:getJobWithFullDetailsResponse" />
+
+			<xs:element name="getJobState" type="req:getJobState" />
+			<xs:element name="getJobStateResponse" type="resp:getJobStateResponse" />
+
+			<xs:element name="listJobs" type="req:listJobs" />
+			<xs:element name="listJobsResponse" type="resp:listJobsResponse" />
+
+			<xs:element name="cancelJob" type="req:cancelJob" />
+			<xs:element name="cancelJobResponse" type="resp:cancelJobResponse" />
+
+
+			<!-- DB ENGINES MANAGEMENT -->
+			<!-- listEngines -->
+			<xs:element name="listDatabaseEngines" type="req:listDatabaseEngines" />
+			<xs:element name="listDatabaseEnginesResponse" type="resp:listDatabaseEnginesResponse" />
+
+			<!-- DATABASE MANAGEMENT -->
+			<!-- deleteDatabase -->
+			<xs:element name="deleteDatabase" type="req:deleteDatabase" />
+			<xs:element name="deleteDatabaseResponse" type="resp:deleteDatabaseResponse" />
+
+			<!-- stopDatabases -->
+			<xs:element name="stopDatabase" type="req:stopDatabase" />
+			<xs:element name="stopDatabaseResponse" type="resp:stopDatabaseResponse" />
+
+			<!-- createDatabase -->
+			<xs:element name="createDatabase" type="req:createDatabase" />
+			<xs:element name="createDatabaseResponse" type="resp:createDatabaseResponse" />
+
+			<!-- startDatabase -->
+			<xs:element name="startDatabase" type="req:startDatabase" />
+			<xs:element name="startDatabaseResponse" type="resp:startDatabaseResponse" />
+
+			<!-- listDatabases -->
+			<xs:element name="listDatabases" type="req:listDatabases" />
+			<xs:element name="listDatabasesResponse" type="resp:listDatabasesResponse" />
+
+			<!-- describeDatabase -->
+			<xs:element name="describeDatabase" type="req:describeDatabase" />
+			<xs:element name="describeDatabaseResponse">
+				<complexType>
+					<sequence>
+						<element name="describeDatabaseReturn" type="resp:describeDatabaseResponse" />
+					</sequence>
+				</complexType>
+			</xs:element>
+
+			<!-- getDatabaseLifeCycle -->
+			<xs:element name="getDatabaseLifeCycle" type="req:getDatabaseLifeCycle" />
+			<xs:element name="getDatabaseLifeCycleResponse" type="resp:getDatabaseLifeCycleResponse" />
+
+			<!-- changeSLO -->
+			<xs:element name="changeSLO" type="req:changeSLO" />
+			<xs:element name="changeSLOResponse" type="resp:changeSLOResponse" />
+
+			<!-- changeSOXStatus -->
+			<xs:element name="changeSOXStatus" type="req:changeSOXStatus" />
+			<xs:element name="changeSOXStatusResponse" type="resp:changeSOXStatusResponse" />
+
+			<!-- changeMaintenanceWindow -->
+			<xs:element name="changeMaintenanceWindow" type="req:changeMaintenanceWindow" />
+			<xs:element name="changeMaintenanceWindowResponse" type="resp:changeMaintenanceWindowResponse" />
+
+			<!-- ScaleStorage -->
+			<xs:element name="scaleStorage" type="req:scaleStorage" />
+			<xs:element name="scaleStorageResponse" type="resp:scaleStorageResponse" />
+
+
+			<!-- SECURITY GROUP MANAGEMENT -->
+			<!-- CreateDatabaseSecurityGroup -->
+			<xs:element name="createDatabaseSecurityGroup" type="req:createDatabaseSecurityGroup" />
+			<xs:element name="createDatabaseSecurityGroupResponse" type="resp:createDatabaseSecurityGroupResponse" />
+
+			<!-- DeleteDatabaseSecurityGroup -->
+			<xs:element name="deleteDatabaseSecurityGroup" type="req:deleteDatabaseSecurityGroup" />
+			<xs:element name="deleteDatabaseSecurityGroupResponse" type="resp:deleteDatabaseSecurityGroupResponse" />
+
+			<!-- ListDatabaseSecurityGroups -->
+			<xs:element name="listDatabaseSecurityGroups" type="req:listDatabaseSecurityGroups" />
+			<xs:element name="listDatabaseSecurityGroupsResponse" type="resp:listDatabaseSecurityGroupsResponse" />
+
+			<!-- DescribeDatabaseSecurityGroup -->
+			<xs:element name="describeDatabaseSecurityGroup" type="req:describeDatabaseSecurityGroup" />
+			<xs:element name="describeDatabaseSecurityGroupResponse" type="resp:describeDatabaseSecurityGroupResponse" />
+
+			<!-- AuthorizeCIDR -->
+			<xs:element name="authorizeCIDR" type="req:authorizeCIDR" />
+			<xs:element name="authorizeCIDRResponse" type="resp:authorizeCIDRResponse" />
+
+			<!-- RevokeCIDR -->
+			<xs:element name="revokeCIDR" type="req:revokeCIDR" />
+			<xs:element name="revokeCIDRResponse" type="resp:revokeCIDRResponse" />
+
+			<!-- ChangeServiceClass -->
+			<xs:element name="changeServiceClass" type="req:changeServiceClass" />
+			<xs:element name="changeServiceClassResponse" type="resp:changeServiceClassResponse" />
+
+			<!-- GetVersion -->
+			<xs:element name="getVersion" type="req:getVersion" />
+			<xs:element name="getVersionResponse" type="resp:getVersionResponse" />
+
+
+			<!--SNAPSHOT MANAGEMENT -->
+			<!-- CreateSnapshot -->
+			<xs:element name="createSnapshot" type="req:createSnapshot" />
+			<xs:element name="createSnapshotResponse" type="resp:createSnapshotResponse" />
+
+			<!-- DeleteSnapshot -->
+			<xs:element name="deleteSnapshot" type="req:deleteSnapshot" />
+			<xs:element name="deleteSnapshotResponse" type="resp:deleteSnapshotResponse" />
+
+			<!-- UpdateSnapshot -->
+			<xs:element name="updateSnapshot" type="req:updateSnapshot" />
+			<xs:element name="updateSnapshotResponse" type="resp:updateSnapshotResponse" />
+
+			<!-- DescribeSnapshot -->
+			<xs:element name="describeSnapshot" type="req:describeSnapshot" />
+			<xs:element name="describeSnapshotResponse" type="resp:describeSnapshotResponse" />
+
+			<!-- getSnapshotLifeCycle -->
+			<xs:element name="getSnapshotLifeCycle" type="req:getSnapshotLifeCycle" />
+			<xs:element name="getSnapshotLifeCycleResponse" type="resp:getSnapshotLifeCycleResponse" />
+
+			<!-- ListSnapshots -->
+			<xs:element name="listSnapshots" type="req:listSnapshots" />
+			<xs:element name="listSnapshotsResponse" type="resp:listSnapshotsResponse" />
+
+			<xs:element name="listSnapshotsByDatabase" type="req:listSnapshotsByDatabase" />
+			<xs:element name="listSnapshotsByDatabaseResponse" type="resp:listSnapshotsByDatabaseResponse" />
+
+			<!-- RestoreFromSnapshot -->
+			<xs:element name="restoreFromSnapshot" type="req:restoreFromSnapshot" />
+			<xs:element name="restoreFromSnapshotResponse" type="resp:restoreFromSnapshotResponse" />
+
+			<!-- createDatabaseFromSnapshot -->
+			<xs:element name="createDatabaseFromSnapshot" type="req:createDatabaseFromSnapshot" />
+			<xs:element name="createDatabaseFromSnapshotResponse" type="resp:createDatabaseFromSnapshotResponse" />
+
+			<!-- BACKUP & RESTORE MANAGEMENT -->
+			<!-- ChangeBackupPlan -->
+			<xs:element name="changeBackupPlan" type="req:changeBackupPlan" />
+			<xs:element name="changeBackupPlanResponse" type="resp:changeBackupPlanResponse" />
+
+			<!-- ChangeBackupWindow -->
+			<xs:element name="changeBackupWindow" type="req:changeBackupWindow" />
+			<xs:element name="changeBackupWindowResponse" type="resp:changeBackupWindowResponse" />
+
+			<!-- ChangeRetentionPeriod -->
+			<xs:element name="changeRetentionPeriod" type="req:changeRetentionPeriod" />
+			<xs:element name="changeRetentionPeriodResponse" type="resp:changeRetentionPeriodResponse" />
+
+			<!-- RestoreDatabase -->
+			<xs:element name="restoreDatabase" type="req:restoreDatabase" />
+			<xs:element name="restoreDatabaseResponse" type="resp:restoreDatabaseResponse" />
+
+			<!-- CreateDatabaseFromBackup -->
+			<xs:element name="createDatabaseFromBackup" type="req:createDatabaseFromBackup" />
+			<xs:element name="createDatabaseFromBackupResponse" type="resp:createDatabaseFromBackupResponse" />
+
+			<!-- BackupDatabase -->
+			<xs:element name="backupDatabase" type="req:backupDatabase" />
+			<xs:element name="backupDatabaseResponse" type="resp:backupDatabaseResponse" />
+
+			<!-- GetBackupList -->
+			<xs:element name="listAvailableBackups" type="req:listAvailableBackups" />
+			<xs:element name="listAvailableBackupsResponse" type="resp:listAvailableBackupsResponse" />
+
+			<!-- LEASING -->
+			<!-- setLifeTime -->
+			<xs:element name="setLifeTimes" type="req:setLifeTimes" />
+			<xs:element name="setLifeTimesResponse" type="resp:setLifeTimesResponse" />
+
+			<!-- DASHBOARD -->
+			<!-- getDashboard -->
+			<xs:element name="getDashboard" type="req:getDashboard" />
+			<xs:element name="getDashboardResponse" type="resp:getDashboardResponse" />
+
+		</xs:schema>
+	</types>
+
+	<!-- FAULTS -->
+	<message name="UnknownFault">
+		<part name="fault" element="exception:DbaasUnknownFault" />
+	</message>
+	<message name="InvalidCredentialsFault">
+		<part name="fault" element="exception:DbaasInvalidCredentialsFault" />
+	</message>
+	<message name="InvalidParameterFault">
+		<part name="fault" element="exception:DbaasInvalidParameterFault" />
+	</message>
+	<message name="InvalidParameterCombinationFault">
+		<part name="fault" element="exception:DbaasInvalidParameterCombinationFault" />
+	</message>
+	<message name="InternalFailureFault">
+		<part name="fault" element="exception:DbaasInternalFailureFault" />
+	</message>
+	<message name="OperationUnsupportedFault">
+		<part name="fault" element="exception:DbaasOperationUnsupportedFault" />
+	</message>
+	<message name="ServiceUnavailableFault">
+		<part name="fault" element="exception:DbaasServiceUnavailableFault" />
+	</message>
+	<message name="UnknownDatabaseFault">
+		<part name="fault" element="exception:DbaasUnknownDatabaseFault" />
+	</message>
+	<message name="DatabaseAlreadyStartedFault">
+		<part name="fault" element="exception:DbaasDatabaseAlreadyStartedFault" />
+	</message>
+	<message name="DatabaseAlreadyStoppedFault">
+		<part name="fault" element="exception:DbaasDatabaseAlreadyStoppedFault" />
+	</message>
+	<message name="DatabaseAlreadyExistsFault">
+		<part name="fault" element="exception:DbaasDatabaseAlreadyExistsFault" />
+	</message>
+	<message name="QuotaExceededFault">
+		<part name="fault" element="exception:DbaasQuotaExceededFault" />
+	</message>
+	<message name="NotEnoughCapacityFault">
+		<part name="fault" element="exception:DbaasNotEnoughCapacityFault" />
+	</message>
+	<message name="UnknownDatabaseSecurityGroupFault">
+		<part name="fault" element="exception:DbaasUnknownDatabaseSecurityGroupFault" />
+	</message>
+	<message name="UnknownDatabaseParametersSetNameFault">
+		<part name="fault" element="exception:DbaasUnknownDatabaseParametersSetNameFault" />
+	</message>
+	<message name="UnknownJobFault">
+		<part name="fault" element="exception:DbaasUnknownJobFault" />
+	</message>
+	<message name="DatabaseSecurityGroupAlreadyExistsFault">
+		<part name="fault" element="exception:DbaasDatabaseSecurityGroupAlreadyExistsFault" />
+	</message>
+	<message name="SnapshotAlreadyExistsFault">
+		<part name="fault" element="exception:DbaasSnapshotAlreadyExistsFault" />
+	</message>
+	<message name="UnknownSnapshotFault">
+		<part name="fault" element="exception:DbaasUnknownSnapshotFault" />
+	</message>
+	<message name="SnapshotNotAvailableFault">
+		<part name="fault" element="exception:DbaasSnapshotNotAvailableFault" />
+	</message>
+	<message name="DatabaseNotAvailableFault">
+		<part name="fault" element="exception:DbaasDatabaseNotAvailableFault" />
+	</message>
+	<message name="UnknownInfrastructureFault">
+		<part name="fault" element="exception:DbaasUnknownInfrastructureFault" />
+	</message>
+	<message name="UnknownServerFault">
+		<part name="fault" element="exception:DbaasUnknownServerFault" />
+	</message>
+	<message name="UserAlreadyExistsFault">
+		<part name="fault" element="exception:DbaasUserAlreadyExistsFault" />
+	</message>
+	<message name="InvalidRightsFault">
+		<part name="fault" element="exception:DbaasInvalidRightsFault" />
+	</message>
+	<message name="IllegalPasswordFault">
+		<part name="fault" element="exception:DbaasIllegalPasswordFault" />
+	</message>
+	<message name="BadPasswordFault">
+		<part name="fault" element="exception:DbaasBadPasswordFault" />
+	</message>
+	<message name="UnknownUserFault">
+		<part name="fault" element="exception:DbaasUnknownUserFault" />
+	</message>
+	<message name="UnknownTenantFault">
+		<part name="fault" element="exception:DbaasUnknownTenantFault" />
+	</message>
+	<message name="TenantAlreadyExistsFault">
+		<part name="fault" element="exception:DbaasTenantAlreadyExistsFault" />
+	</message>
+	<message name="UserLockedFault">
+		<part name="fault" element="exception:DbaasUserLockedFault" />
+	</message>
+	<message name="WrongUserRoleFault">
+		<part name="fault" element="exception:DbaasWrongUserRoleFault" />
+	</message>
+	<message name="UnknownDatabaseGroupFault">
+		<part name="fault" element="exception:DbaasUnknownDatabaseGroupFault" />
+	</message>
+	<message name="DatabaseGroupAlreadyExistsFault">
+		<part name="fault" element="exception:DbaasDatabaseGroupAlreadyExistsFault" />
+	</message>
+	<message name="ToMuchDataFault">
+		<part name="fault" element="exception:DbaasToMuchDataFault" />
+	</message>
+	<message name="UnsufficientMaintenanceWindowFault">
+		<part name="fault" element="exception:DbaasUnsufficientMaintenanceWindowFault" />
+	</message>
+	<message name="InvalidUserFault">
+		<part name="fault" element="exception:DbaasInvalidUserFault" />
+	</message>
+	<message name="DatabaseAlreadyDeletedFault">
+		<part name="fault" element="exception:DbaasDatabaseAlreadyDeletedFault" />
+	</message>
+	<message name="DatabaseDeletedFault">
+		<part name="fault" element="exception:DbaasDatabaseDeletedFault" />
+	</message>
+	<message name="ConcurrentJobsFault">
+		<part name="fault" element="exception:DbaasConcurrentJobsFault" />
+	</message>
+	<message name="NotFoundFault">
+		<part name="fault" element="exception:DbaasNotFoundFault" />
+	</message>
+	<message name="OperationNotPermittedFault">
+		<part name="fault" element="exception:DbaasOperationNotPermittedFault" />
+	</message>
+	<message name="AlreadyExistFault">
+		<part name="fault" element="exception:DbaasAlreadyExistFault" />
+	</message>
+	<message name="UnknownDatacenterFault">
+		<part name="fault" element="exception:DbaasUnknownDatacenterFault" />
+	</message>
+	<message name="EmptyDatabaseFault">
+		<part name="fault" element="exception:DbaasEmptyDatabaseFault" />
+	</message>
+	<message name="UnknownSshKeyFault">
+		<part name="fault" element="exception:DbaasUnknownSshKeyFault" />
+	</message>
+	<message name="SshKeyValidationFault">
+		<part name="fault" element="exception:DbaasSshKeyValidationFault" />
+	</message>
+	<message name="UserNameForbiddenFault">
+		<part name="fault" element="exception:DbaasUserNameForbiddenFault" />
+	</message>
+	<message name="CronExpressionFault">
+		<part name="fault" element="exception:DbaasCronExpressionFault" />
+	</message>
+	<message name="SnapshotAlreadyDeletedFault">
+		<part name="fault" element="exception:DbaasSnapshotAlreadyDeletedFault" />
+	</message>
+
+	<!-- REQUESTS -->
+	<message name="changeSLO">
+		<part name="parameters" element="tns:changeSLO" />
+	</message>
+	<message name="changeSOXStatus">
+		<part name="parameters" element="tns:changeSOXStatus" />
+	</message>
+	<message name="changeMaintenanceWindow">
+		<part name="parameters" element="tns:changeMaintenanceWindow" />
+	</message>
+
+	<message name="scaleStorage">
+		<part name="parameters" element="tns:scaleStorage" />
+	</message>
+	<message name="changeUserSettings">
+		<part name="parameters" element="tns:changeUserSettings" />
+	</message>
+	<message name="getUserSettings">
+		<part name="parameters" element="tns:getUserSettings" />
+	</message>
+	<message name="getJob">
+		<part name="parameters" element="tns:getJob" />
+	</message>
+	<message name="getJobWithFullDetails">
+		<part name="parameters" element="tns:getJobWithFullDetails" />
+	</message>
+	<message name="getJobState">
+		<part name="parameters" element="tns:getJobState" />
+	</message>
+	<message name="listJobs">
+		<part name="parameters" element="tns:listJobs" />
+	</message>
+	<message name="cancelJob">
+		<part name="parameters" element="tns:cancelJob" />
+	</message>
+	<message name="stopDatabase">
+		<part name="parameters" element="tns:stopDatabase" />
+	</message>
+	<message name="createDatabase">
+		<part name="parameters" element="tns:createDatabase" />
+	</message>
+	<message name="listDatabaseEngines">
+		<part name="parameters" element="tns:listDatabaseEngines" />
+	</message>
+	<message name="listDatabases">
+		<part name="parameters" element="tns:listDatabases" />
+	</message>
+	<message name="startDatabase">
+		<part name="parameters" element="tns:startDatabase" />
+	</message>
+	<message name="deleteDatabase">
+		<part name="parameters" element="tns:deleteDatabase" />
+	</message>
+	<message name="describeDatabase">
+		<part name="parameters" element="tns:describeDatabase" />
+	</message>
+	<message name="getDatabaseLifeCycle">
+		<part name="parameters" element="tns:getDatabaseLifeCycle" />
+	</message>
+	<message name="createDatabaseUser">
+		<part name="parameters" element="tns:createDatabaseUser" />
+	</message>
+	<message name="dropDatabaseUser">
+		<part name="parameters" element="tns:dropDatabaseUser" />
+	</message>
+	<message name="changePassword">
+		<part name="parameters" element="tns:changePassword" />
+	</message>
+	<message name="createDatabaseSecurityGroup">
+		<part name="parameters" element="tns:createDatabaseSecurityGroup" />
+	</message>
+	<message name="deleteDatabaseSecurityGroup">
+		<part name="parameters" element="tns:deleteDatabaseSecurityGroup" />
+	</message>
+	<message name="listDatabaseSecurityGroups">
+		<part name="parameters" element="tns:listDatabaseSecurityGroups" />
+	</message>
+	<message name="describeDatabaseSecurityGroup">
+		<part name="parameters" element="tns:describeDatabaseSecurityGroup" />
+	</message>
+	<message name="authorizeCIDR">
+		<part name="parameters" element="tns:authorizeCIDR" />
+	</message>
+	<message name="revokeCIDR">
+		<part name="parameters" element="tns:revokeCIDR" />
+	</message>
+	<message name="changeServiceClass">
+		<part name="parameters" element="tns:changeServiceClass" />
+	</message>
+	<message name="getVersion">
+		<part name="parameters" element="tns:getVersion" />
+	</message>
+	<message name="createSnapshot">
+		<part name="parameters" element="tns:createSnapshot" />
+	</message>
+	<message name="deleteSnapshot">
+		<part name="parameters" element="tns:deleteSnapshot" />
+	</message>
+	<message name="updateSnapshot">
+		<part name="parameters" element="tns:updateSnapshot" />
+	</message>
+	<message name="describeSnapshot">
+		<part name="parameters" element="tns:describeSnapshot" />
+	</message>
+	<message name="getSnapshotLifeCycle">
+		<part name="parameters" element="tns:getSnapshotLifeCycle" />
+	</message>
+	<message name="listSnapshots">
+		<part name="parameters" element="tns:listSnapshots" />
+	</message>
+	<message name="listSnapshotsByDatabase">
+		<part name="parameters" element="tns:listSnapshotsByDatabase" />
+	</message>
+	<message name="restoreFromSnapshot">
+		<part name="parameters" element="tns:restoreFromSnapshot" />
+	</message>
+	<message name="createDatabaseFromSnapshot">
+		<part name="parameters" element="tns:createDatabaseFromSnapshot" />
+	</message>
+	<message name="changeBackupPlan">
+		<part name="parameters" element="tns:changeBackupPlan" />
+	</message>
+	<message name="changeBackupWindow">
+		<part name="parameters" element="tns:changeBackupWindow" />
+	</message>
+	<message name="changeRetentionPeriod">
+		<part name="parameters" element="tns:changeRetentionPeriod" />
+	</message>
+	<message name="restoreDatabase">
+		<part name="parameters" element="tns:restoreDatabase" />
+	</message>
+	<message name="createDatabaseFromBackup">
+		<part name="parameters" element="tns:createDatabaseFromBackup" />
+	</message>
+	<message name="listAvailableBackups">
+		<part name="parameters" element="tns:listAvailableBackups" />
+	</message>
+	<message name="backupDatabase">
+		<part name="parameters" element="tns:backupDatabase" />
+	</message>
+	<message name="listAllowedDatabaseEngines">
+		<part name="parameters" element="tns:listAllowedDatabaseEngines" />
+	</message>
+	<message name="listAllowedSlos">
+		<part name="parameters" element="tns:listAllowedSlos" />
+	</message>
+	<message name="listAllowedUsages">
+		<part name="parameters" element="tns:listAllowedUsages" />
+	</message>
+	<message name="listAllowedServiceClasses">
+		<part name="parameters" element="tns:listAllowedServiceClasses" />
+	</message>
+	<message name="setLifeTimes">
+		<part name="parameters" element="tns:setLifeTimes" />
+	</message>
+	<message name="getDashboard">
+		<part name="parameters" element="tns:getDashboard" />
+	</message>
+
+	<!--RESPONSES -->
+	<message name="changeSLOResponse">
+		<part name="parameters" element="tns:changeSLOResponse" />
+	</message>
+	<message name="changeSOXStatusResponse">
+		<part name="parameters" element="tns:changeSOXStatusResponse" />
+	</message>
+	<message name="changeMaintenanceWindowResponse">
+		<part name="parameters" element="tns:changeMaintenanceWindowResponse" />
+	</message>
+	<message name="scaleStorageResponse">
+		<part name="parameters" element="tns:scaleStorageResponse" />
+	</message>
+	<message name="changeUserSettingsResponse">
+		<part name="parameters" element="tns:changeUserSettingsResponse" />
+	</message>
+	<message name="getUserSettingsResponse">
+		<part name="parameters" element="tns:getUserSettingsResponse" />
+	</message>
+	<message name="startDatabaseResponse">
+		<part name="parameters" element="tns:startDatabaseResponse" />
+	</message>
+	<message name="stopDatabaseResponse">
+		<part name="parameters" element="tns:stopDatabaseResponse" />
+	</message>
+	<message name="listDatabaseEnginesResponse">
+		<part name="parameters" element="tns:listDatabaseEnginesResponse" />
+	</message>
+	<message name="createDatabaseResponse">
+		<part name="parameters" element="tns:createDatabaseResponse" />
+	</message>
+	<message name="listDatabasesResponse">
+		<part name="parameters" element="tns:listDatabasesResponse" />
+	</message>
+	<message name="deleteDatabaseResponse">
+		<part name="parameters" element="tns:deleteDatabaseResponse" />
+	</message>
+	<message name="describeDatabaseResponse">
+		<part name="parameters" element="tns:describeDatabaseResponse" />
+	</message>
+	<message name="getDatabaseLifeCycleResponse">
+		<part name="parameters" element="tns:getDatabaseLifeCycleResponse" />
+	</message>
+	<message name="createDatabaseUserResponse">
+		<part name="parameters" element="tns:createDatabaseUserResponse" />
+	</message>
+	<message name="dropDatabaseUserResponse">
+		<part name="parameters" element="tns:dropDatabaseUserResponse" />
+	</message>
+	<message name="changePasswordResponse">
+		<part name="parameters" element="tns:changePasswordResponse" />
+	</message>
+	<message name="getJobResponse">
+		<part name="parameters" element="tns:getJobResponse" />
+	</message>
+	<message name="getJobWithFullDetailsResponse">
+		<part name="parameters" element="tns:getJobWithFullDetailsResponse" />
+	</message>
+	<message name="getJobStateResponse">
+		<part name="parameters" element="tns:getJobStateResponse" />
+	</message>
+	<message name="listJobsResponse">
+		<part name="parameters" element="tns:listJobsResponse" />
+	</message>
+	<message name="cancelJobResponse">
+		<part name="parameters" element="tns:cancelJobResponse" />
+	</message>
+	<message name="createDatabaseSecurityGroupResponse">
+		<part name="parameters" element="tns:createDatabaseSecurityGroupResponse" />
+	</message>
+	<message name="deleteDatabaseSecurityGroupResponse">
+		<part name="parameters" element="tns:deleteDatabaseSecurityGroupResponse" />
+	</message>
+	<message name="listDatabaseSecurityGroupsResponse">
+		<part name="parameters" element="tns:listDatabaseSecurityGroupsResponse" />
+	</message>
+	<message name="describeDatabaseSecurityGroupResponse">
+		<part name="parameters" element="tns:describeDatabaseSecurityGroupResponse" />
+	</message>
+	<message name="authorizeCIDRResponse">
+		<part name="parameters" element="tns:authorizeCIDRResponse" />
+	</message>
+	<message name="revokeCIDRResponse">
+		<part name="parameters" element="tns:revokeCIDRResponse" />
+	</message>
+	<message name="changeServiceClassResponse">
+		<part name="parameters" element="tns:changeServiceClassResponse" />
+	</message>
+	<message name="getVersionResponse">
+		<part name="parameters" element="tns:getVersionResponse" />
+	</message>
+	<message name="createSnapshotResponse">
+		<part name="parameters" element="tns:createSnapshotResponse" />
+	</message>
+	<message name="deleteSnapshotResponse">
+		<part name="parameters" element="tns:deleteSnapshotResponse" />
+	</message>
+	<message name="updateSnapshotResponse">
+		<part name="parameters" element="tns:updateSnapshotResponse" />
+	</message>
+	<message name="describeSnapshotResponse">
+		<part name="parameters" element="tns:describeSnapshotResponse" />
+	</message>
+	<message name="getSnapshotLifeCycleResponse">
+		<part name="parameters" element="tns:getSnapshotLifeCycleResponse" />
+	</message>
+	<message name="listSnapshotsResponse">
+		<part name="parameters" element="tns:listSnapshotsResponse" />
+	</message>
+	<message name="listSnapshotsByDatabaseResponse">
+		<part name="parameters" element="tns:listSnapshotsByDatabaseResponse" />
+	</message>
+	<message name="restoreFromSnapshotResponse">
+		<part name="parameters" element="tns:restoreFromSnapshotResponse" />
+	</message>
+	<message name="createDatabaseFromSnapshotResponse">
+		<part name="parameters" element="tns:createDatabaseFromSnapshotResponse" />
+	</message>
+	<message name="changeBackupPlanResponse">
+		<part name="parameters" element="tns:changeBackupPlanResponse" />
+	</message>
+	<message name="changeBackupWindowResponse">
+		<part name="parameters" element="tns:changeBackupWindowResponse" />
+	</message>
+	<message name="changeRetentionPeriodResponse">
+		<part name="parameters" element="tns:changeRetentionPeriodResponse" />
+	</message>
+	<message name="restoreDatabaseResponse">
+		<part name="parameters" element="tns:restoreDatabaseResponse" />
+	</message>
+	<message name="createDatabaseFromBackupResponse">
+		<part name="parameters" element="tns:createDatabaseFromBackupResponse" />
+	</message>
+	<message name="listAvailableBackupsResponse">
+		<part name="parameters" element="tns:listAvailableBackupsResponse" />
+	</message>
+	<message name="backupDatabaseResponse">
+		<part name="parameters" element="tns:backupDatabaseResponse" />
+	</message>
+	<message name="listAllowedDatabaseEnginesResponse">
+		<part name="parameters" element="tns:listAllowedDatabaseEnginesResponse" />
+	</message>
+	<message name="listAllowedSlosResponse">
+		<part name="parameters" element="tns:listAllowedSlosResponse" />
+	</message>
+	<message name="listAllowedUsagesResponse">
+		<part name="parameters" element="tns:listAllowedUsagesResponse" />
+	</message>
+	<message name="listAllowedServiceClassesResponse">
+		<part name="parameters" element="tns:listAllowedServiceClassesResponse" />
+	</message>
+	<message name="setLifeTimesResponse">
+		<part name="parameters" element="tns:setLifeTimesResponse" />
+	</message>
+	<message name="getDashboardResponse">
+		<part name="parameters" element="tns:getDashboardResponse" />
+	</message>
+
+
+	<portType name="DbaasApiRemote">
+
+		<operation name="scaleStorage">
+			<input name="scaleStorage" message="tns:scaleStorage" />
+			<output name="scaleStorageResponse" message="tns:scaleStorageResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="QuotaExceededFault" message="tns:QuotaExceededFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="ToMuchDataFault" message="tns:ToMuchDataFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="DatabaseNotAvailableFault" message="tns:DatabaseNotAvailableFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+		</operation>
+
+		<operation name="changeUserSettings">
+			<input name="changeUserSettings" message="tns:changeUserSettings" />
+			<output name="changeUserSettingsResponse" message="tns:changeUserSettingsResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="getUserSettings">
+			<input name="getUserSettings" message="tns:getUserSettings" />
+			<output name="getUserSettingsResponse" message="tns:getUserSettingsResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+		</operation>
+
+		<operation name="deleteDatabase">
+			<input name="deleteDatabase" message="tns:deleteDatabase" />
+			<output name="deleteDatabaseResponse" message="tns:deleteDatabaseResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="DatabaseAlreadyDeletedFault" message="tns:DatabaseAlreadyDeletedFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="changeSLO">
+			<input name="changeSLO" message="tns:changeSLO" />
+			<output name="changeSLOResponse" message="tns:changeSLOResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="changeSOXStatus">
+			<input name="changeSOXStatus" message="tns:changeSOXStatus" />
+			<output name="changeSOXStatusResponse" message="tns:changeSOXStatusResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="changeMaintenanceWindow">
+			<input name="changeMaintenanceWindow" message="tns:changeMaintenanceWindow" />
+			<output name="changeMaintenanceWindowResponse" message="tns:changeMaintenanceWindowResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnsufficientMaintenanceWindowFault" message="tns:UnsufficientMaintenanceWindowFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="stopDatabase">
+			<input name="stopDatabase" message="tns:stopDatabase" />
+			<output name="stopDatabaseResponse" message="tns:stopDatabaseResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="DatabaseAlreadyStoppedFault" message="tns:DatabaseAlreadyStoppedFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="listDatabaseEngines">
+			<input name="listDatabaseEngines" message="tns:listDatabaseEngines" />
+			<output name="listDatabaseEnginesResponse" message="tns:listDatabaseEnginesResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="IllegalPasswordFault" message="tns:IllegalPasswordFault" />
+		</operation>
+
+		<operation name="createDatabase">
+			<input name="createDatabase" message="tns:createDatabase" />
+			<output name="createDatabaseResponse" message="tns:createDatabaseResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="DatabaseAlreadyExistsFault" message="tns:DatabaseAlreadyExistsFault" />
+			<fault name="QuotaExceededFault" message="tns:QuotaExceededFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseParametersSetNameFault" message="tns:UnknownDatabaseParametersSetNameFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="IllegalPasswordFault" message="tns:IllegalPasswordFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+			<fault name="UserNameForbiddenFault" message="tns:UserNameForbiddenFault" />
+		</operation>
+
+		<operation name="startDatabase">
+			<input name="startDatabase" message="tns:startDatabase" />
+			<output name="startDatabaseResponse" message="tns:startDatabaseResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="DatabaseAlreadyStartedFault" message="tns:DatabaseAlreadyStartedFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="listDatabases">
+			<input name="listDatabases" message="tns:listDatabases" />
+			<output name="listDatabasesResponse" message="tns:listDatabasesResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+		</operation>
+
+		<operation name="describeDatabase">
+			<input name="describeDatabase" message="tns:describeDatabase" />
+			<output name="describeDatabaseResponse" message="tns:describeDatabaseResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="getDatabaseLifeCycle">
+			<input name="getDatabaseLifeCycle" message="tns:getDatabaseLifeCycle" />
+			<output name="getDatabaseLifeCycleResponse" message="tns:getDatabaseLifeCycleResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="createDatabaseUser">
+			<input name="createDatabaseUser" message="tns:createDatabaseUser" />
+			<output name="createDatabaseUserResponse" message="tns:createDatabaseUserResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="IllegalPasswordFault" message="tns:IllegalPasswordFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="UserAlreadyExistsFault" message="tns:UserAlreadyExistsFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+			<fault name="UserNameForbiddenFault" message="tns:UserNameForbiddenFault" />
+		</operation>
+
+		<operation name="dropDatabaseUser">
+			<input name="dropDatabaseUser" message="tns:dropDatabaseUser" />
+			<output name="dropDatabaseUserResponse" message="tns:dropDatabaseUserResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="changePassword">
+			<input name="changePassword" message="tns:changePassword" />
+			<output name="changePasswordResponse" message="tns:changePasswordResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="IllegalPasswordFault" message="tns:IllegalPasswordFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="BadPasswordFault" message="tns:BadPasswordFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="getJob">
+			<input name="getJob" message="tns:getJob" />
+			<output name="getJobResponse" message="tns:getJobResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownJobFault" message="tns:UnknownJobFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<operation name="getJobState">
+			<input name="getJobState" message="tns:getJobState" />
+			<output name="getJobStateResponse" message="tns:getJobStateResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownJobFault" message="tns:UnknownJobFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<operation name="getJobWithFullDetails">
+			<input name="getJobWithFullDetails" message="tns:getJobWithFullDetails" />
+			<output name="getJobWithFullDetailsResponse" message="tns:getJobWithFullDetailsResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownJobFault" message="tns:UnknownJobFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<operation name="listJobs">
+			<input name="listJobs" message="tns:listJobs" />
+			<output name="listJobsResponse" message="tns:listJobsResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownJobFault" message="tns:UnknownJobFault" />
+		</operation>
+
+		<operation name="cancelJob">
+			<input name="cancelJob" message="tns:cancelJob" />
+			<output name="cancelJobResponse" message="tns:cancelJobResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownJobFault" message="tns:UnknownJobFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<operation name="createDatabaseSecurityGroup">
+			<input name="createDatabaseSecurityGroup" message="tns:createDatabaseSecurityGroup" />
+			<output name="createDatabaseSecurityGroupResponse" message="tns:createDatabaseSecurityGroupResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="DatabaseSecurityGroupAlreadyExistsFault" message="tns:DatabaseSecurityGroupAlreadyExistsFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="deleteDatabaseSecurityGroup">
+			<input name="deleteDatabaseSecurityGroup" message="tns:deleteDatabaseSecurityGroup" />
+			<output name="deleteDatabaseSecurityGroupResponse" message="tns:deleteDatabaseSecurityGroupResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="listDatabaseSecurityGroups">
+			<input name="listDatabaseSecurityGroups" message="tns:listDatabaseSecurityGroups" />
+			<output name="listDatabaseSecurityGroupsResponse" message="tns:listDatabaseSecurityGroupsResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+		</operation>
+
+		<operation name="describeDatabaseSecurityGroup">
+			<input name="describeDatabaseSecurityGroup" message="tns:describeDatabaseSecurityGroup" />
+			<output name="describeDatabaseSecurityGroupResponse" message="tns:describeDatabaseSecurityGroupResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="authorizeCIDR">
+			<input name="authorizeCIDR" message="tns:authorizeCIDR" />
+			<output name="authorizeCIDRResponse" message="tns:authorizeCIDRResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="revokeCIDR">
+			<input name="revokeCIDR" message="tns:revokeCIDR" />
+			<output name="revokeCIDRResponse" message="tns:revokeCIDRResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="changeServiceClass">
+			<input name="changeServiceClass" message="tns:changeServiceClass" />
+			<output name="changeServiceClassResponse" message="tns:changeServiceClassResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="QuotaExceededFault" message="tns:QuotaExceededFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+		</operation>
+
+		<operation name="getVersion">
+			<input name="getVersion" message="tns:getVersion" />
+			<output name="getVersionResponse" message="tns:getVersionResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<!-- SNAPSHOT -->
+		<operation name="createSnapshot">
+			<input name="createSnapshot" message="tns:createSnapshot" />
+			<output name="createSnapshotResponse" message="tns:createSnapshotResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="SnapshotAlreadyExistsFault" message="tns:SnapshotAlreadyExistsFault" />
+			<fault name="QuotaExceededFault" message="tns:QuotaExceededFault" />
+			<fault name="DatabaseNotAvailableFault" message="tns:DatabaseNotAvailableFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="AlreadyExistFault" message="tns:AlreadyExistFault" />
+			<fault name="EmptyDatabaseFault" message="tns:EmptyDatabaseFault" />
+			<fault name="CronExpressionFault" message="tns:CronExpressionFault" />
+		</operation>
+
+		<operation name="deleteSnapshot">
+			<input name="deleteSnapshot" message="tns:deleteSnapshot" />
+			<output name="deleteSnapshotResponse" message="tns:deleteSnapshotResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownSnapshotFault" message="tns:UnknownSnapshotFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="InvalidRightsFault" message="tns:InvalidRightsFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="SnapshotAlreadyDeletedFault" message="tns:SnapshotAlreadyDeletedFault" />
+		</operation>
+
+		<operation name="updateSnapshot">
+			<input name="updateSnapshot" message="tns:updateSnapshot" />
+			<output name="updateSnapshotResponse" message="tns:updateSnapshotResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownSnapshotFault" message="tns:UnknownSnapshotFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+			<fault name="InvalidRightsFault" message="tns:InvalidRightsFault" />
+		</operation>
+
+		<operation name="describeSnapshot">
+			<input name="describeSnapshot" message="tns:describeSnapshot" />
+			<output name="describeSnapshotResponse" message="tns:describeSnapshotResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownSnapshotFault" message="tns:UnknownSnapshotFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="InvalidRightsFault" message="tns:InvalidRightsFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+		</operation>
+
+		<operation name="getSnapshotLifeCycle">
+			<input name="getSnapshotLifeCycle" message="tns:getSnapshotLifeCycle" />
+			<output name="getSnapshotLifeCycleResponse" message="tns:getSnapshotLifeCycleResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownSnapshotFault" message="tns:UnknownSnapshotFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="InvalidRightsFault" message="tns:InvalidRightsFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="UnknownUserFault" message="tns:UnknownUserFault" />
+		</operation>
+
+		<operation name="listSnapshots">
+			<input name="listSnapshots" message="tns:listSnapshots" />
+			<output name="listSnapshotsResponse" message="tns:listSnapshotsResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="listSnapshotsByDatabase">
+			<input name="listSnapshotsByDatabase" message="tns:listSnapshotsByDatabase" />
+			<output name="listSnapshotsByDatabaseResponse" message="tns:listSnapshotsByDatabaseResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="restoreFromSnapshot">
+			<input name="restoreFromSnapshot" message="tns:restoreFromSnapshot" />
+			<output name="restoreFromSnapshotResponse" message="tns:restoreFromSnapshotResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="UnknownSnapshotFault" message="tns:UnknownSnapshotFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="InvalidRightsFault" message="tns:InvalidRightsFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="DatabaseDeletedFault" message="tns:DatabaseDeletedFault" />
+			<fault name="SnapshotNotAvailableFault" message="tns:SnapshotNotAvailableFault" />
+		</operation>
+
+		<operation name="createDatabaseFromSnapshot">
+			<input name="createDatabaseFromSnapshot" message="tns:createDatabaseFromSnapshot" />
+			<output name="createDatabaseFromSnapshotResponse" message="tns:createDatabaseFromSnapshotResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="DatabaseAlreadyExistsFault" message="tns:DatabaseAlreadyExistsFault" />
+			<fault name="QuotaExceededFault" message="tns:QuotaExceededFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseParametersSetNameFault" message="tns:UnknownDatabaseParametersSetNameFault" />
+			<fault name="UnknownSnapshotFault" message="tns:UnknownSnapshotFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="IllegalPasswordFault" message="tns:IllegalPasswordFault" />
+			<fault name="ConcurrentJobsFault" message="tns:ConcurrentJobsFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+			<fault name="InvalidRightsFault" message="tns:InvalidRightsFault" />
+			<fault name="UserNameForbiddenFault" message="tns:UserNameForbiddenFault" />
+		</operation>
+
+		<!-- BACKUP -->
+		<operation name="changeBackupPlan">
+			<input name="changeBackupPlan" message="tns:changeBackupPlan" />
+			<output name="changeBackupPlanResponse" message="tns:changeBackupPlanResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="changeBackupWindow">
+			<input name="changeBackupWindow" message="tns:changeBackupWindow" />
+			<output name="changeBackupWindowResponse" message="tns:changeBackupWindowResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="changeRetentionPeriod">
+			<input name="changeRetentionPeriod" message="tns:changeRetentionPeriod" />
+			<output name="changeRetentionPeriodResponse" message="tns:changeRetentionPeriodResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="restoreDatabase">
+			<input name="restoreDatabase" message="tns:restoreDatabase" />
+			<output name="restoreDatabaseResponse" message="tns:restoreDatabaseResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="createDatabaseFromBackup">
+			<input name="createDatabaseFromBackup" message="tns:createDatabaseFromBackup" />
+			<output name="createDatabaseFromBackupResponse" message="tns:createDatabaseFromBackupResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="DatabaseAlreadyExistsFault" message="tns:DatabaseAlreadyExistsFault" />
+			<fault name="QuotaExceededFault" message="tns:QuotaExceededFault" />
+			<fault name="NotEnoughCapacityFault" message="tns:NotEnoughCapacityFault" />
+			<fault name="UnknownDatabaseSecurityGroupFault" message="tns:UnknownDatabaseSecurityGroupFault" />
+			<fault name="UnknownDatabaseParametersSetNameFault" message="tns:UnknownDatabaseParametersSetNameFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="IllegalPasswordFault" message="tns:IllegalPasswordFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="backupDatabase">
+			<input name="backupDatabase" message="tns:backupDatabase" />
+			<output name="backupDatabaseResponse" message="tns:backupDatabaseResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="listAvailableBackups">
+			<input name="listAvailableBackups" message="tns:listAvailableBackups" />
+			<output name="listAvailableBackupsResponse" message="tns:listAvailableBackupsResponse" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+		</operation>
+
+		<operation name="listAllowedDatabaseEngines">
+			<input name="listAllowedDatabaseEngines" message="tns:listAllowedDatabaseEngines" />
+			<output name="listAllowedDatabaseEnginesResponse" message="tns:listAllowedDatabaseEnginesResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<operation name="listAllowedSlos">
+			<input name="listAllowedSlos" message="tns:listAllowedSlos" />
+			<output name="listAllowedSlosResponse" message="tns:listAllowedSlosResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<operation name="listAllowedUsages">
+			<input name="listAllowedUsages" message="tns:listAllowedUsages" />
+			<output name="listAllowedUsagesResponse" message="tns:listAllowedUsagesResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<operation name="listAllowedServiceClasses">
+			<input name="listAllowedServiceClasses" message="tns:listAllowedServiceClasses" />
+			<output name="listAllowedServiceClassesResponse" message="tns:listAllowedServiceClassesResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+		</operation>
+
+		<!-- LEASING -->
+		<operation name="setLifeTimes">
+			<input name="setLifeTimes" message="tns:setLifeTimes" />
+			<output name="setLifeTimesResponse" message="tns:setLifeTimesResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+			<fault name="InvalidParameterCombinationFault" message="tns:InvalidParameterCombinationFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UnknownDatabaseFault" message="tns:UnknownDatabaseFault" />
+			<fault name="UnknownDatabaseGroupFault" message="tns:UnknownDatabaseGroupFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="WrongUserRoleFault" message="tns:WrongUserRoleFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="UnknownTenantFault" message="tns:UnknownTenantFault" />
+			<fault name="OperationNotPermittedFault" message="tns:OperationNotPermittedFault" />
+		</operation>
+
+		<!-- DASHBOARD -->
+		<operation name="getDashboard">
+			<input name="getDashboard" message="tns:getDashboard" />
+			<output name="getDashboardResponse" message="tns:getDashboardResponse" />
+			<fault name="UnknownFault" message="tns:UnknownFault" />
+			<fault name="InternalFailureFault" message="tns:InternalFailureFault" />
+			<fault name="OperationUnsupportedFault" message="tns:OperationUnsupportedFault" />
+			<fault name="ServiceUnavailableFault" message="tns:ServiceUnavailableFault" />
+			<fault name="UserLockedFault" message="tns:UserLockedFault" />
+			<fault name="InvalidUserFault" message="tns:InvalidUserFault" />
+			<fault name="InvalidParameterFault" message="tns:InvalidParameterFault" />
+		</operation>
+
+	</portType>
+
+	<binding name="DbaasApiRemoteBinding" type="tns:DbaasApiRemote">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<operation name="scaleStorage">
+			<soap:operation soapAction="" style="document" />
+			<input name="scaleStorage">
+				<soap:body use="literal" />
+			</input>
+			<output name="scaleStorageResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="QuotaExceededFault">
+				<soap:fault name="QuotaExceededFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="ToMuchDataFault">
+				<soap:fault name="ToMuchDataFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="DatabaseNotAvailableFault">
+				<soap:fault name="DatabaseNotAvailableFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- USER -->
+		<operation name="changeUserSettings">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeUserSettings">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeUserSettingsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="getUserSettings">
+			<soap:operation soapAction="" style="document" />
+			<input name="getUserSettings">
+				<soap:body use="literal" />
+			</input>
+			<output name="getUserSettingsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- DATABASE -->
+		<operation name="deleteDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="deleteDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="deleteDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="DatabaseAlreadyDeletedFault">
+				<soap:fault name="DatabaseAlreadyDeletedFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="stopDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="stopDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="stopDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="DatabaseAlreadyStoppedFault">
+				<soap:fault name="DatabaseAlreadyStoppedFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listDatabaseEngines">
+			<soap:operation soapAction="" style="document" />
+			<input name="listDatabaseEngines">
+				<soap:body use="literal" />
+			</input>
+			<output name="listDatabaseEnginesResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="IllegalPasswordFault">
+				<soap:fault name="IllegalPasswordFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="createDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="createDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="createDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="DatabaseAlreadyExistsFault">
+				<soap:fault name="DatabaseAlreadyExistsFault" use="literal" />
+			</fault>
+			<fault name="QuotaExceededFault">
+				<soap:fault name="QuotaExceededFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseParametersSetNameFault">
+				<soap:fault name="UnknownDatabaseParametersSetNameFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="IllegalPasswordFault">
+				<soap:fault name="IllegalPasswordFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+			<fault name="UserNameForbiddenFault">
+				<soap:fault name="UserNameForbiddenFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="startDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="startDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="startDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="DatabaseAlreadyStartedFault">
+				<soap:fault name="DatabaseAlreadyStartedFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listDatabases">
+			<soap:operation soapAction="" style="document" />
+			<input name="listDatabases">
+				<soap:body use="literal" />
+			</input>
+			<output name="listDatabasesResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="describeDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="describeDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="describeDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="getDatabaseLifeCycle">
+			<soap:operation soapAction="" style="document" />
+			<input name="getDatabaseLifeCycle">
+				<soap:body use="literal" />
+			</input>
+			<output name="getDatabaseLifeCycleResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- JOB -->
+		<operation name="getJob">
+			<soap:operation soapAction="" style="document" />
+			<input name="getJob">
+				<soap:body use="literal" />
+			</input>
+			<output name="getJobResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownJobFault">
+				<soap:fault name="UnknownJobFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="getJobState">
+			<soap:operation soapAction="" style="document" />
+			<input name="getJobState">
+				<soap:body use="literal" />
+			</input>
+			<output name="getJobStateResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownJobFault">
+				<soap:fault name="UnknownJobFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="getJobWithFullDetails">
+			<soap:operation soapAction="" style="document" />
+			<input name="getJobWithFullDetails">
+				<soap:body use="literal" />
+			</input>
+			<output name="getJobWithFullDetailsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownJobFault">
+				<soap:fault name="UnknownJobFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listJobs">
+			<soap:operation soapAction="" style="document" />
+			<input name="listJobs">
+				<soap:body use="literal" />
+			</input>
+			<output name="listJobsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="UnknownJobFault">
+				<soap:fault name="UnknownJobFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="cancelJob">
+			<soap:operation soapAction="" style="document" />
+			<input name="cancelJob">
+				<soap:body use="literal" />
+			</input>
+			<output name="cancelJobResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownJobFault">
+				<soap:fault name="UnknownJobFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- DB SECURITY GROUP -->
+		<operation name="createDatabaseSecurityGroup">
+			<soap:operation soapAction="" style="document" />
+			<input name="createDatabaseSecurityGroup">
+				<soap:body use="literal" />
+			</input>
+			<output name="createDatabaseSecurityGroupResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="DatabaseSecurityGroupAlreadyExistsFault">
+				<soap:fault name="DatabaseSecurityGroupAlreadyExistsFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="deleteDatabaseSecurityGroup">
+			<soap:operation soapAction="" style="document" />
+			<input name="deleteDatabaseSecurityGroup">
+				<soap:body use="literal" />
+			</input>
+			<output name="deleteDatabaseSecurityGroupResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listDatabaseSecurityGroups">
+			<soap:operation soapAction="" style="document" />
+			<input name="listDatabaseSecurityGroups">
+				<soap:body use="literal" />
+			</input>
+			<output name="listDatabaseSecurityGroupsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="describeDatabaseSecurityGroup">
+			<soap:operation soapAction="" style="document" />
+			<input name="describeDatabaseSecurityGroup">
+				<soap:body use="literal" />
+			</input>
+			<output name="describeDatabaseSecurityGroupResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- CIDR -->
+		<operation name="authorizeCIDR">
+			<soap:operation soapAction="" style="document" />
+			<input name="authorizeCIDR">
+				<soap:body use="literal" />
+			</input>
+			<output name="authorizeCIDRResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="revokeCIDR">
+			<soap:operation soapAction="" style="document" />
+			<input name="revokeCIDR">
+				<soap:body use="literal" />
+			</input>
+			<output name="revokeCIDRResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changeServiceClass">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeServiceClass">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeServiceClassResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="QuotaExceededFault">
+				<soap:fault name="QuotaExceededFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="getVersion">
+			<soap:operation soapAction="" style="document" />
+			<input name="getVersion">
+				<soap:body use="literal" />
+			</input>
+			<output name="getVersionResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- SNAPSHOT -->
+		<operation name="createSnapshot">
+			<soap:operation soapAction="" style="document" />
+			<input name="createSnapshot">
+				<soap:body use="literal" />
+			</input>
+			<output name="createSnapshotResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="SnapshotAlreadyExistsFault">
+				<soap:fault name="SnapshotAlreadyExistsFault" use="literal" />
+			</fault>
+			<fault name="QuotaExceededFault">
+				<soap:fault name="QuotaExceededFault" use="literal" />
+			</fault>
+			<fault name="DatabaseNotAvailableFault">
+				<soap:fault name="DatabaseNotAvailableFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="AlreadyExistFault">
+				<soap:fault name="AlreadyExistFault" use="literal" />
+			</fault>
+			<fault name="EmptyDatabaseFault">
+				<soap:fault name="EmptyDatabaseFault" use="literal" />
+			</fault>
+			<fault name="CronExpressionFault">
+				<soap:fault name="CronExpressionFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="deleteSnapshot">
+			<soap:operation soapAction="" style="document" />
+			<input name="deleteSnapshot">
+				<soap:body use="literal" />
+			</input>
+			<output name="deleteSnapshotResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownSnapshotFault">
+				<soap:fault name="UnknownSnapshotFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="InvalidRightsFault">
+				<soap:fault name="InvalidRightsFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="SnapshotAlreadyDeletedFault">
+				<soap:fault name="SnapshotAlreadyDeletedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="updateSnapshot">
+			<soap:operation soapAction="" style="document" />
+			<input name="updateSnapshot">
+				<soap:body use="literal" />
+			</input>
+			<output name="updateSnapshotResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownSnapshotFault">
+				<soap:fault name="UnknownSnapshotFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="InvalidRightsFault">
+				<soap:fault name="InvalidRightsFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="describeSnapshot">
+			<soap:operation soapAction="" style="document" />
+			<input name="describeSnapshot">
+				<soap:body use="literal" />
+			</input>
+			<output name="describeSnapshotResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownSnapshotFault">
+				<soap:fault name="UnknownSnapshotFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="InvalidRightsFault">
+				<soap:fault name="InvalidRightsFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="getSnapshotLifeCycle">
+			<soap:operation soapAction="" style="document" />
+			<input name="getSnapshotLifeCycle">
+				<soap:body use="literal" />
+			</input>
+			<output name="getSnapshotLifeCycleResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownSnapshotFault">
+				<soap:fault name="UnknownSnapshotFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="InvalidRightsFault">
+				<soap:fault name="InvalidRightsFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listSnapshots">
+			<soap:operation soapAction="" style="document" />
+			<input name="listSnapshots">
+				<soap:body use="literal" />
+			</input>
+			<output name="listSnapshotsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listSnapshotsByDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="listSnapshotsByDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="listSnapshotsByDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="restoreFromSnapshot">
+			<soap:operation soapAction="" style="document" />
+			<input name="restoreFromSnapshot">
+				<soap:body use="literal" />
+			</input>
+			<output name="restoreFromSnapshotResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownSnapshotFault">
+				<soap:fault name="UnknownSnapshotFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="InvalidRightsFault">
+				<soap:fault name="InvalidRightsFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="DatabaseDeletedFault">
+				<soap:fault name="DatabaseDeletedFault" use="literal" />
+			</fault>
+			<fault name="SnapshotNotAvailableFault">
+				<soap:fault name="SnapshotNotAvailableFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="createDatabaseFromSnapshot">
+			<soap:operation soapAction="" style="document" />
+			<input name="createDatabaseFromSnapshot">
+				<soap:body use="literal" />
+			</input>
+			<output name="createDatabaseFromSnapshotResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="DatabaseAlreadyExistsFault">
+				<soap:fault name="DatabaseAlreadyExistsFault" use="literal" />
+			</fault>
+			<fault name="QuotaExceededFault">
+				<soap:fault name="QuotaExceededFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseParametersSetNameFault">
+				<soap:fault name="UnknownDatabaseParametersSetNameFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="IllegalPasswordFault">
+				<soap:fault name="IllegalPasswordFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+			<fault name="UnknownSnapshotFault">
+				<soap:fault name="UnknownSnapshotFault" use="literal" />
+			</fault>
+			<fault name="InvalidRightsFault">
+				<soap:fault name="InvalidRightsFault" use="literal" />
+			</fault>
+			<fault name="UserNameForbiddenFault">
+				<soap:fault name="UserNameForbiddenFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- BACKUP -->
+		<operation name="changeBackupPlan">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeBackupPlan">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeBackupPlanResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changeBackupWindow">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeBackupWindow">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeBackupWindowResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changeRetentionPeriod">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeRetentionPeriod">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeRetentionPeriodResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="restoreDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="restoreDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="restoreDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="createDatabaseFromBackup">
+			<soap:operation soapAction="" style="document" />
+			<input name="createDatabaseFromBackup">
+				<soap:body use="literal" />
+			</input>
+			<output name="createDatabaseFromBackupResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="DatabaseAlreadyExistsFault">
+				<soap:fault name="DatabaseAlreadyExistsFault" use="literal" />
+			</fault>
+			<fault name="QuotaExceededFault">
+				<soap:fault name="QuotaExceededFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseSecurityGroupFault">
+				<soap:fault name="UnknownDatabaseSecurityGroupFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseParametersSetNameFault">
+				<soap:fault name="UnknownDatabaseParametersSetNameFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="IllegalPasswordFault">
+				<soap:fault name="IllegalPasswordFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="backupDatabase">
+			<soap:operation soapAction="" style="document" />
+			<input name="backupDatabase">
+				<soap:body use="literal" />
+			</input>
+			<output name="backupDatabaseResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listAvailableBackups">
+			<soap:operation soapAction="" style="document" />
+			<input name="listAvailableBackups">
+				<soap:body use="literal" />
+			</input>
+			<output name="listAvailableBackupsResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changeSLO">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeSLO">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeSLOResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="NotEnoughCapacityFault">
+				<soap:fault name="NotEnoughCapacityFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changeSOXStatus">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeSOXStatus">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeSOXStatusResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changeMaintenanceWindow">
+			<soap:operation soapAction="" style="document" />
+			<input name="changeMaintenanceWindow">
+				<soap:body use="literal" />
+			</input>
+			<output name="changeMaintenanceWindowResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnsufficientMaintenanceWindowFault">
+				<soap:fault name="UnsufficientMaintenanceWindowFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listAllowedDatabaseEngines">
+			<soap:operation soapAction="" style="document" />
+			<input name="listAllowedDatabaseEngines">
+				<soap:body use="literal" />
+			</input>
+			<output name="listAllowedDatabaseEnginesResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listAllowedSlos">
+			<soap:operation soapAction="" style="document" />
+			<input name="listAllowedSlos">
+				<soap:body use="literal" />
+			</input>
+			<output name="listAllowedSlosResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listAllowedUsages">
+			<soap:operation soapAction="" style="document" />
+			<input name="listAllowedUsages">
+				<soap:body use="literal" />
+			</input>
+			<output name="listAllowedUsagesResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="listAllowedServiceClasses">
+			<soap:operation soapAction="" style="document" />
+			<input name="listAllowedServiceClasses">
+				<soap:body use="literal" />
+			</input>
+			<output name="listAllowedServiceClassesResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- LEASING -->
+		<operation name="setLifeTimes">
+			<soap:operation soapAction="" style="document" />
+			<input name="setLifeTimes">
+				<soap:body use="literal" />
+			</input>
+			<output name="setLifeTimesResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<!-- DASHBOARD -->
+		<operation name="getDashboard">
+			<soap:operation soapAction="" style="document" />
+			<input name="getDashboard">
+				<soap:body use="literal" />
+			</input>
+			<output name="getDashboardResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="createDatabaseUser">
+			<soap:operation soapAction="" style="document" />
+			<input name="createDatabaseUser">
+				<soap:body use="literal" />
+			</input>
+			<output name="createDatabaseUserResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="IllegalPasswordFault">
+				<soap:fault name="IllegalPasswordFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="UserAlreadyExistsFault">
+				<soap:fault name="UserAlreadyExistsFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+			<fault name="UserNameForbiddenFault">
+				<soap:fault name="UserNameForbiddenFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="dropDatabaseUser">
+			<soap:operation soapAction="" style="document" />
+			<input name="dropDatabaseUser">
+				<soap:body use="literal" />
+			</input>
+			<output name="dropDatabaseUserResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+		<operation name="changePassword">
+			<soap:operation soapAction="" style="document" />
+			<input name="changePassword">
+				<soap:body use="literal" />
+			</input>
+			<output name="changePasswordResponse">
+				<soap:body use="literal" />
+			</output>
+			<fault name="UnknownFault">
+				<soap:fault name="UnknownFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterFault">
+				<soap:fault name="InvalidParameterFault" use="literal" />
+			</fault>
+			<fault name="InvalidParameterCombinationFault">
+				<soap:fault name="InvalidParameterCombinationFault" use="literal" />
+			</fault>
+			<fault name="InternalFailureFault">
+				<soap:fault name="InternalFailureFault" use="literal" />
+			</fault>
+			<fault name="OperationUnsupportedFault">
+				<soap:fault name="OperationUnsupportedFault" use="literal" />
+			</fault>
+			<fault name="ServiceUnavailableFault">
+				<soap:fault name="ServiceUnavailableFault" use="literal" />
+			</fault>
+			<fault name="UnknownUserFault">
+				<soap:fault name="UnknownUserFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseFault">
+				<soap:fault name="UnknownDatabaseFault" use="literal" />
+			</fault>
+			<fault name="UnknownDatabaseGroupFault">
+				<soap:fault name="UnknownDatabaseGroupFault" use="literal" />
+			</fault>
+			<fault name="IllegalPasswordFault">
+				<soap:fault name="IllegalPasswordFault" use="literal" />
+			</fault>
+			<fault name="UserLockedFault">
+				<soap:fault name="UserLockedFault" use="literal" />
+			</fault>
+			<fault name="WrongUserRoleFault">
+				<soap:fault name="WrongUserRoleFault" use="literal" />
+			</fault>
+			<fault name="InvalidUserFault">
+				<soap:fault name="InvalidUserFault" use="literal" />
+			</fault>
+			<fault name="BadPasswordFault">
+				<soap:fault name="BadPasswordFault" use="literal" />
+			</fault>
+			<fault name="UnknownTenantFault">
+				<soap:fault name="UnknownTenantFault" use="literal" />
+			</fault>
+			<fault name="ConcurrentJobsFault">
+				<soap:fault name="ConcurrentJobsFault" use="literal" />
+			</fault>
+			<fault name="OperationNotPermittedFault">
+				<soap:fault name="OperationNotPermittedFault" use="literal" />
+			</fault>
+		</operation>
+
+	</binding>
+
+	<service name="DbaasApiRemoteService">
+		<port name="DbaasApiRemotePort" binding="tns:DbaasApiRemoteBinding">
+			<soap:address location="http://localhost:8080/Dbaas/V2.0/DbaasApi" />
+		</port>
+	</service>
+
+</definitions>

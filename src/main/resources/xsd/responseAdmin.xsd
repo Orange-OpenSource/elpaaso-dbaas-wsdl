@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!--
+
+    Copyright (C) 2015 Orange
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" xmlns:enum="http://orange_dbaas/Ws/Api/enumeration"
+	xmlns:data="http://orange_dbaas/Ws/Api/data" targetNamespace="http://orange_dbaas/Ws/Api/responseAdmin" xmlns:tns="http://orange_dbaas/Ws/Api/responseAdmin"
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/enumeration" schemaLocation="enumeration.xsd" />
+	<xsd:import namespace="http://orange_dbaas/Ws/Api/data" schemaLocation="data.xsd" />
+
+	<!-- HISTORY -->
+	<xsd:complexType name="getUserHistoryResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="history" type="data:history" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="getTenantHistoryResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="history" type="data:history" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="getHistoryResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="history" type="data:history" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- USER and USERROLE -->
+	<xsd:complexType name="describeUserResponse">
+		<xsd:sequence>
+			<xsd:element name="dbaasUserInfo" type="data:dbaasUserInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeUserPasswordResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="changeUserQuotaResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="grantUserRoleToUserResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="grantDatabaseGroupUserRoleToUserResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="revokeUserRoleFromUserResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="revokeDatabaseGroupUserRoleFromUserResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="createUserResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="changeUserStateResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listUsersResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="user" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabaseGroupsResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databaseGroup" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteUserResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB GROUP -->
+	<xsd:complexType name="createDatabaseGroupResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabaseGroupResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- TENANT -->
+	<xsd:complexType name="createTenantResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteTenantResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="addUserToTenantResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listTenantsResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="tenant" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- LEASING -->
+	<!--xsd:complexType name="getLifeTimeResponse"> <xsd:sequence> <xsd:element name="serviceLifeTime" type="xsd:int" /> <xsd:element name="dataLifeTime" type="xsd:int" 
+		/> </xsd:sequence> </xsd:complexType -->
+
+	<!--xsd:complexType name="setDataLifeTimeResponse"> <xsd:sequence /> </xsd:complexType -->
+
+	<!--xsd:complexType name="setServiceLifeTimeResponse"> <xsd:sequence /> </xsd:complexType -->
+
+	<xsd:complexType name="setTenantLeasingPolicyResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="launchPurgeResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- DB ENGINE -->
+	<xsd:complexType name="createDatabaseEngineResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatabaseEngineResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listEnginesResponse">
+		<xsd:sequence>
+			<xsd:element name="engines" type="data:databaseEngineInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="describeEngineResponse">
+		<xsd:sequence>
+			<xsd:element name="engine" type="data:databaseEngineInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- OPERATING SYSTEM -->
+	<xsd:complexType name="createOperatingSystemResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteOperatingSystemResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listOperatingSystemsResponse">
+		<xsd:sequence>
+			<xsd:element name="operatingSystem" type="data:operatingSystemInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- FILER -->
+	<xsd:complexType name="createStaticStorageResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="createDynamicFilerResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteStorageResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listStoragesResponse">
+		<xsd:sequence>
+			<xsd:element name="filer" type="data:storageInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="addStorageToInfrastructureResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="removeStorageFromInfrastructureResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="addStaticStorageToServerResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="removeStaticStorageFromServerResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<!-- SERVER -->
+	<xsd:complexType name="stopServerResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startServerResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="changeServerStateResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="describeServerResponse">
+		<xsd:sequence>
+			<xsd:element name="serverInfo" type="data:serverInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listServersResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="server" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createServerResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="updateServerResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteServerResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="enableServerUserPasswordResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="enableServerUserSshAuthResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="serverUserGetSshKeyResponse">
+		<xsd:sequence>
+			<xsd:element name="sshKey" type="data:sshKeyInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="addSshKeyResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="generateSshKeyResponse">
+		<xsd:sequence>
+			<xsd:element name="sshKey" type="data:sshKeyInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getSshKeyResponse">
+		<xsd:sequence>
+			<xsd:element name="sshKey" type="data:sshKeyInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="removeSshKeyResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listSshKeysResponse">
+		<xsd:sequence>
+			<xsd:element name="sshKeys" type="data:sshKeyInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- INFRASTRUCTURE -->
+	<xsd:complexType name="stopInfrastructureResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startInfrastructureResponse">
+		<xsd:sequence>
+			<xsd:element name="jobId" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listInfrastructuresResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="infrastructure" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createInfrastructureResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteInfrastructureResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="describeInfrastructureResponse">
+		<xsd:sequence>
+			<xsd:element name="infrastructureInfo" type="data:infrastructureInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatabasesInInfrastructureResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="databases" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- DATACENTER -->
+	<xsd:complexType name="addInfrastructureToDatacenterResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="removeInfrastructureFromDatacenterResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listDatacentersResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Datacenter" type="data:dbaasDatacenterInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createDatacenterResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="changeDatacenterDescriptionResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="deleteDatacenterResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="describeDatacenterResponse">
+		<xsd:sequence>
+			<xsd:element name="datacenter" type="data:dbaasDatacenterInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="startDatacenterResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="stopDatacenterResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+
+	<xsd:complexType name="getProtocolsResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="protocols" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getMaxDatabasesResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="maxDatabases" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getDatabasesLeftResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="databasesLeft" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getEndPointsForProtocolResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="endPoint" type="data:endPoint" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="purgeJobsResponse">
+		<xsd:sequence>
+			<xsd:element name="nbJobsPurged" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listServicesClassResponse">
+		<xsd:sequence>
+			<xsd:element name="serviceClass" type="data:serviceClassInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="acknowledgeAlarmResponse">
+		<xsd:sequence />
+	</xsd:complexType>
+
+	<xsd:complexType name="listCurrentAlarmsResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="alarms" type="data:alarmInfo" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>
