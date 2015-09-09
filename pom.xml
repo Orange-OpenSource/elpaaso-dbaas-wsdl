@@ -18,12 +18,12 @@
 
 	<parent>
 		<groupId>com.orange.clara.cloud</groupId>
-		<artifactId>cloud-plugins-management</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<artifactId>elpaaso-plugins-management</artifactId>
+		<version>3.0.63</version>
 	</parent>
 
 	<groupId>com.orange.clara.cloud.dbaas.wsdl</groupId>
-	<artifactId>cloud-orange-dbaas-wsdl</artifactId>
+	<artifactId>elpaaso-dbaas-wsdl</artifactId>
 	<version>1.63-SNAPSHOT</version>
 	<name>${project.artifactId} - API Construction Module for DBAAS</name>
 	<description> API Construction Module for DBAAS</description>
