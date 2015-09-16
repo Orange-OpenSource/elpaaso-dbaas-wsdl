@@ -12,6 +12,8 @@
 # limitations under the License.
 #
 
+set -ev
+
 if [ "${TRAVIS_PULL_REQUEST}" = "false" -a "$TRAVIS_BRANCH" = "master" ]
 then
 	RELEASE_CANDIDATE_VERSION=$(cat RELEASE_CANDIDATE_VERSION)
@@ -28,7 +30,8 @@ then
 	echo "Promotion URL to use: $JFROG_PROMOTION_URL"
 	curl --silent -X POST -u ${BINTRAY_USER}:${BINTRAY_PASSWORD} $JFROG_PROMOTION_URL
 
-	BINTRAY_URL="https://jcenter.bintray.com/com/orange/clara/cloud/$REPO_NAME/$RELEASE_CANDIDATE_VERSION/$REPO_NAME-$RELEASE_CANDIDATE_VERSION.jar"
-	echo "Checking release $RELEASE_CANDIDATE_VERSION is available at $BINTRAY_URL"
+	sleep 10
+	BINTRAY_URL="https://jcenter.bintray.com/com/orange/clara/cloud/$REPO_NAME/$RELEASE_NAME/$REPO_NAME-$RELEASE_NAME.jar"
+	echo "Checking release $RELEASE_NAME is available at $BINTRAY_URL"
 	wget $BINTRAY_URL
 fi
