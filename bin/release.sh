@@ -31,7 +31,7 @@ then
 	curl --silent -X POST -u ${BINTRAY_USER}:${BINTRAY_PASSWORD} $JFROG_PROMOTION_URL
 
 	sleep 10
-	BINTRAY_URL="https://jcenter.bintray.com/com/orange/clara/cloud/$REPO_NAME/$RELEASE_NAME/$REPO_NAME-$RELEASE_NAME.jar"
+	BINTRAY_URL="https://jcenter.bintray.com/com/orange/clara/cloud/dbaas/wsdl/$REPO_NAME/$RELEASE_NAME/$REPO_NAME-$RELEASE_NAME.jar"
 	echo "Checking release $RELEASE_NAME is available at $BINTRAY_URL"
 	wget $BINTRAY_URL
 fi
